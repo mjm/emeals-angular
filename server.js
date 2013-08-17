@@ -14,6 +14,7 @@ app.use(app.router);
 
 app.get('/api/meals', meals.index);
 app.get('/api/meals/:id', meals.show);
+app.put('/api/meals/:id', meals.update);
 
 // development only
 if ('development' == app.get('env')) {

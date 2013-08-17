@@ -1,0 +1,10 @@
+<p>
+  <input type="search" class="form-control" placeholder="Search meals...">
+</p>
+<div class="list-group">
+  <a ng-repeat="meal in meals" href="#/meals/{{meal.id}}" class="list-group-item" ng-class="{active: meal.id == $routeParams.mealId}">
+    <h4 class="list-group-item-heading">{{meal.entree.name}}</h4>
+    <p class="list-group-item-text">{{meal.side.name}}</p>
+  </a>
+</div>
+

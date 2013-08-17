@@ -12,16 +12,22 @@ describe "Controller: MealsListCtrl", ->
       $routeParams: params
       MealsLoader: -> mealsDeferred.promise
 
-  it 'has no meals when the meals have not loaded yet', ->
-    expect(scope.meals).toBeUndefined()
+  it 'sets the meals', ->
+    expect(scope.meals).not.toBeUndefined()
 
   it 'sets the route parameters', ->
     expect(scope.$routeParams.mealId).toEqual "1"
 
-  describe 'when the meals have loaded', ->
-    beforeEach ->
-      mealsDeferred.resolve []
+  describe "when a mealupdated event is fired", ->
+    beforeEach inject ($rootScope) ->
+      scope.meals = [{id:1, name: 'Meal'}, {id:2, name: 'Other Meal'}]
+      scope.$broadcast "mealupdated",
+        id: 2
+        name: 'Delicious Meal'
       scope.$apply()
 
-    it 'sets the meals', ->
-      expect(scope.meals).toEqual []
+    it "updates the data in the matching meal", ->
+      expect(scope.meals[1].name).toEqual "Delicious Meal"
+
+    it "does not update the data in other meals", ->
+      expect(scope.meals[0].name).toEqual "Meal"

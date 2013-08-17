@@ -1,4 +1,4 @@
-emeals = angular.module('emeals', ['ngResource'])
+emeals = angular.module('emeals', ['restangular'])
 
 emeals.config ($routeProvider) ->
   $routeProvider.when '/',
@@ -17,6 +17,9 @@ emeals.config ($routeProvider) ->
         MealLoader()
   .otherwise
     redirectTo: '/'
+
+emeals.config (RestangularProvider) ->
+  RestangularProvider.setBaseUrl "/api"
 
 #emeals.config ($locationProvider) ->
   #$locationProvider.html5Mode true

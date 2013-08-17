@@ -1,0 +1,23 @@
+<h2>Edit Meal</h2>
+
+<form role="form">
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="entree_name">Entree Name</label>
+        <input type="text" class="form-control" id="entree_name" ng-model="meal.entree.name" autofocus>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="form-group">
+        <label for="side_name">Side Name</label>
+        <input type="text" class="form-control" id="side_name" ng-model="meal.side.name">
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" ng-click="save()">
+    <span class="glyphicon glyphicon-ok"></span>
+    Save Meal Changes
+  </button>
+  <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+</form>
