@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var db = require('./db');
 
 var meals = [
   {id: 1, entree: {name: "Entree 1"}, side: {name: "Side 1"}},
@@ -11,20 +12,19 @@ function getMeal(id) {
 }
 
 exports.index = function(req, res) {
-  res.send(meals);
+  db.allMeals(function(err, meals) {
+    res.send(meals);
+  });
 };
 
 exports.show = function(req, res) {
-  var meal = getMeal(req.params.id);
-  if (!meal) {
-    res.send(404, { error: "Could not find meal with ID " + req.params.id });
-    return;
-  }
-  res.send(meal);
+  db.getMeal(req.params.id, function (err, meal) {
+    res.send(meal);
+  });
 };
 
 exports.update = function(req, res) {
-  var meal = req.body;
-  _.extend(getMeal(req.params.id), meal);
-  res.send(getMeal(req.params.id));
+  db.updateMeal(req.body, function (err, result) {
+    res.send(result);
+  });
 };

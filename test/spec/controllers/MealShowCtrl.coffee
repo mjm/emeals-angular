@@ -6,7 +6,7 @@ describe "Controller: MealShowCtrl", ->
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
     meal =
-      id: 1
+      _id: "asdf"
       entree:
         name: "Entree 1"
       side:

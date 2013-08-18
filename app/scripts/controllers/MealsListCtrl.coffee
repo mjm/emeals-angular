@@ -5,5 +5,5 @@ angular.module('emeals').controller 'MealsListCtrl', ($scope, $routeParams, Meal
   $scope.$routeParams = $routeParams
 
   $scope.$on "mealupdated", (e, meal) ->
-    existingMeal = _.find $scope.meals, id: meal.id
+    existingMeal = _.find $scope.meals, _id: meal._id
     _.extend existingMeal, meal

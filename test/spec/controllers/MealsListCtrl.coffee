@@ -20,9 +20,9 @@ describe "Controller: MealsListCtrl", ->
 
   describe "when a mealupdated event is fired", ->
     beforeEach inject ($rootScope) ->
-      scope.meals = [{id:1, name: 'Meal'}, {id:2, name: 'Other Meal'}]
+      scope.meals = [{_id:'asdf', name: 'Meal'}, {_id:'qwer', name: 'Other Meal'}]
       scope.$broadcast "mealupdated",
-        id: 2
+        _id: 'qwer'
         name: 'Delicious Meal'
       scope.$apply()
 

@@ -6,7 +6,7 @@ describe "Controller: MealEditCtrl", ->
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
     meal =
-      id: 1
+      _id: "asdf"
       entree:
         name: "Entree 1"
       side:
@@ -28,7 +28,7 @@ describe "Controller: MealEditCtrl", ->
       expect(meal.put).not.toHaveBeenCalled()
 
     it "navigates to the meal show page", inject ($location) ->
-      expect($location.path()).toEqual "/meals/1"
+      expect($location.path()).toEqual "/meals/asdf"
 
   describe "saving edits", ->
     mealDeferred = originalPath = undefined
@@ -60,4 +60,4 @@ describe "Controller: MealEditCtrl", ->
         expect(mealUpdatedSpy).toHaveBeenCalled()
 
       it "navigates to the meal show page", inject ($location) ->
-        expect($location.path()).toEqual "/meals/1"
+        expect($location.path()).toEqual "/meals/asdf"

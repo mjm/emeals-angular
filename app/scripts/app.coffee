@@ -20,6 +20,8 @@ emeals.config ($routeProvider) ->
 
 emeals.config (RestangularProvider) ->
   RestangularProvider.setBaseUrl "/api"
+  RestangularProvider.setRestangularFields
+    id: "_id"
 
 #emeals.config ($locationProvider) ->
   #$locationProvider.html5Mode true
