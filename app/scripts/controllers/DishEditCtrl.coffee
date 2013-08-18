@@ -1,4 +1,13 @@
 angular.module('emeals').controller 'DishEditCtrl', ($scope) ->
+  $scope.unitChoices = [
+    "teaspoon",
+    "tablespoon",
+    "cup",
+    "oz",
+    "lb",
+    "clove"
+  ].sort()
+
   $scope.$watch 'meal', ->
     $scope.dish = $scope.meal[$scope.type]
 
