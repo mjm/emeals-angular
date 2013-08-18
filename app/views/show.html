@@ -6,16 +6,13 @@
 
 <h2>{{meal.entree.name}} <small>{{meal.side.name}}</small></h2>
 
-<div ng-controller="IngredientsListCtrl" ng-init="type='entree'">
-  <ng-include src="'views/ingredients_list.html'"></ng-include>
+<div class="row">
+  <div class="col-md-6" ng-controller="DishShowCtrl" ng-init="type='entree'">
+    <ng-include src="'views/dish_show.html'"></ng-include>
+  </div>
+
+  <div class="col-md-6" ng-controller="DishShowCtrl" ng-init="type='side'">
+    <ng-include src="'views/dish_show.html'"></ng-include>
+  </div>
 </div>
 
-<h4>Instructions</h4>
-<pre>{{meal.entree.instructions}}</pre>
-
-<div ng-controller="IngredientsListCtrl" ng-init="type='side'">
-  <ng-include src="'views/ingredients_list.html'"></ng-include>
-</div>
-
-<h4>Instructions</h4>
-<pre>{{meal.side.instructions}}</pre>
