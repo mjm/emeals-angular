@@ -25,3 +25,5 @@ emeals.config (RestangularProvider) ->
 
 #emeals.config ($locationProvider) ->
   #$locationProvider.html5Mode true
+
+_.mixin _.string.exports()

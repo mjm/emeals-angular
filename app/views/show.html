@@ -6,3 +6,10 @@
 
 <h2>{{meal.entree.name}} <small>{{meal.side.name}}</small></h2>
 
+<div ng-controller="IngredientsListCtrl" ng-init="type='entree'">
+  <ng-include src="'views/ingredients_list.html'"></ng-include>
+</div>
+
+<div ng-controller="IngredientsListCtrl" ng-init="type='side'">
+  <ng-include src="'views/ingredients_list.html'"></ng-include>
+</div>
