@@ -10,6 +10,12 @@
   <ng-include src="'views/ingredients_list.html'"></ng-include>
 </div>
 
+<h4>Instructions</h4>
+<pre>{{meal.entree.instructions}}</pre>
+
 <div ng-controller="IngredientsListCtrl" ng-init="type='side'">
   <ng-include src="'views/ingredients_list.html'"></ng-include>
 </div>
+
+<h4>Instructions</h4>
+<pre>{{meal.side.instructions}}</pre>
