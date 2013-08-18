@@ -1,0 +1,37 @@
+<div class="panel-heading">
+  <h3 class="panel-title">
+    <a href="#{{type}}" class="accordion-toggle" data-toggle="collapse" data-parent="#dishes">
+      {{type | capitalize}}
+    </a>
+  </h3>
+</div>
+<div id="{{type}}" class="panel-collapse collapse" ng-class="{in: type == 'entree'}">
+  <div class="panel-body">
+    <div class="form-group">
+      <label for="{{type}}_name">Name</label>
+      <input type="text" class="form-control" id="{{type}}_name" ng-model="dish.name">
+    </div>
+    <h5>Ingredients</h5>
+    <div class="row" ng-repeat="ing in dish.ingredients">
+      <div class="col-sm-2">
+        <input type="text" class="form-control" ng-model="ing.amount">
+      </div>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" ng-model="ing.unit">
+      </div>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" ng-model="ing.description">
+      </div>
+      <div class="col-sm-1">
+        <button class="btn btn-danger btn-small" ng-click="remove($index)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </div>
+    </div>
+    <button class="btn btn-success btn-small" ng-click="add()">
+      <span class="glyphicon glyphicon-plus"></span>
+      Add Ingredient
+    </button>
+  </div>
+</div>
+
