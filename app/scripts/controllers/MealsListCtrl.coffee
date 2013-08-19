@@ -7,3 +7,7 @@ angular.module('emeals').controller 'MealsListCtrl', ($scope, $routeParams, Meal
   $scope.$on "mealupdated", (e, meal) ->
     existingMeal = _.find $scope.meals, _id: meal._id
     _.extend existingMeal, meal
+
+  $scope.$on "mealdeleted", (e, meal) ->
+    index = _.findIndex $scope.meals, _id: meal._id
+    $scope.meals.splice index, 1

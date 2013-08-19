@@ -31,3 +31,14 @@ describe "Controller: MealsListCtrl", ->
 
     it "does not update the data in other meals", ->
       expect(scope.meals[0].name).toEqual "Meal"
+
+  describe "when a mealdeleted event is fired", ->
+    beforeEach inject ($rootScope) ->
+      scope.meals = [{_id:'asdf', name: 'Meal'}, {_id:'qwer', name: 'Other Meal'}]
+      scope.$broadcast "mealdeleted",
+        _id: 'qwer'
+        name: 'Other Meal'
+      scope.$apply()
+
+    it "deletes the meal from the collection", ->
+      expect(scope.meals).toEqual [_id: 'asdf', name: 'Meal']

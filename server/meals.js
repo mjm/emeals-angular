@@ -28,3 +28,9 @@ exports.update = function(req, res) {
     res.send(result);
   });
 };
+
+exports.destroy = function(req, res) {
+  db.deleteMeal(req.params.id, req.query._rev, function (err, result) {
+    res.send(result);
+  });
+};

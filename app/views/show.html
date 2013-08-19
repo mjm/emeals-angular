@@ -1,7 +1,10 @@
-<div class="pull-right">
+<div class="btn-group pull-right">
   <a ng-href="#/meals/{{meal._id}}/edit" class="btn btn-primary">
     <span class="glyphicon glyphicon-pencil"></span> Edit
   </a>
+  <button class="btn btn-primary" ng-click="remove()">
+    <span class="glyphicon glyphicon-remove"></span> Delete
+  </button>
 </div>
 
 <h2>{{meal.entree.name}} <small>{{meal.side.name}}</small></h2>

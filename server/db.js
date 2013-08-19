@@ -15,3 +15,7 @@ exports.getMeal = function (id, callback) {
 exports.updateMeal = function (meal, callback) {
   db.save(meal._id, meal._rev, _.omit(meal, '_id', '_rev'), callback);
 };
+
+exports.deleteMeal = function (id, rev, callback) {
+  db.remove(id, rev, callback);
+};

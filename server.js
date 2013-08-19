@@ -15,6 +15,7 @@ app.use(app.router);
 app.get('/api/meals', meals.index);
 app.get('/api/meals/:id', meals.show);
 app.put('/api/meals/:id', meals.update);
+app.delete('/api/meals/:id', meals.destroy);
 
 // development only
 if ('development' == app.get('env')) {
