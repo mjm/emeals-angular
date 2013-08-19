@@ -1,6 +1,11 @@
 {
   "name": "emeals-ng",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mjm/emeals-angular.git"
+  },
+  "author": "Matt Moriarity <matt@mattmoriarity.com>",
   "dependencies": {
     "grunt": "~0.4.1",
     "karma-script-launcher": "~0.1.0",
