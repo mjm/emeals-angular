@@ -24,9 +24,29 @@ exports.deleteMeal = function (id, rev, callback) {
 
 exports.importMenu = function (menu, callback) {
   var req = http.request({
-    hostname: "http://localhost:4567/import"
+    host: "localhost",
+    port: 4567,
+    path: "/import",
+    method: "POST",
+    headers: {
+      'Content-type': 'application/pdf'
+    }
   }, function (res) {
-    callback(null, res);
+    res.on('data', function(data) {
+      var meals = JSON.parse(data);
+      var results = [];
+      function process(meal) {
+        if (meal) {
+          db.save(meal, function (err, res) {
+            results.push(res);
+            process(meals.shift());
+          });
+        } else {
+          callback(null, results);
+        }
+      }
+      process(meals.shift());
+    });
   });
 
   req.on('error', function (err) {

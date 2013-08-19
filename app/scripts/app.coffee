@@ -1,4 +1,4 @@
-emeals = angular.module('emeals', ['restangular'])
+emeals = angular.module('emeals', ['restangular', 'blueimp.fileupload'])
 
 emeals.config ($routeProvider) ->
   $routeProvider.when '/',

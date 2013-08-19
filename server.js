@@ -16,7 +16,7 @@ app.get('/api/meals', meals.index);
 app.get('/api/meals/:id', meals.show);
 app.put('/api/meals/:id', meals.update);
 app.delete('/api/meals/:id', meals.destroy);
-app.post('/api/meals', meals.import);
+app.post('/api/meals/import', meals.import);
 
 // development only
 if ('development' == app.get('env')) {
