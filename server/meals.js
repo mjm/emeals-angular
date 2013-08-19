@@ -1,15 +1,4 @@
-var _ = require('underscore');
 var db = require('./db');
-
-var meals = [
-  {id: 1, entree: {name: "Entree 1"}, side: {name: "Side 1"}},
-  {id: 2, entree: {name: "Entree 2"}, side: {name: "Side 2"}},
-  {id: 3, entree: {name: "Entree 3"}, side: {name: "Side 3"}}
-];
-
-function getMeal(id) {
-  return _.findWhere(meals, {id: parseInt(id)});
-}
 
 exports.index = function(req, res) {
   db.allMeals(function(err, meals) {
@@ -31,6 +20,12 @@ exports.update = function(req, res) {
 
 exports.destroy = function(req, res) {
   db.deleteMeal(req.params.id, req.query._rev, function (err, result) {
+    res.send(result);
+  });
+};
+
+exports.import = function(req, res) {
+  db.importMenu(req.files.menu.path, function (err, result) {
     res.send(result);
   });
 };
