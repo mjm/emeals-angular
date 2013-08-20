@@ -1,0 +1,11 @@
+<h4>{{type | capitalize}} Ingredients</h4>
+<ul>
+  <li ng-repeat="ingredient in dish.ingredients">
+    {{ingredient.amount}} {{ingredient.unit}} {{ingredient.description}}
+  </li>
+</ul>
+
+<h4>{{type | capitalize}} Instructions</h4>
+<ul>
+  <line-list text="dish.instructions"></line-list>
+</ul>

@@ -1,0 +1,43 @@
+<div class="panel-heading">
+  <h3 class="panel-title">
+    <a href="#{{type}}" class="accordion-toggle" data-toggle="collapse" data-parent="#dishes">
+      {{type | capitalize}}
+    </a>
+  </h3>
+</div>
+<div id="{{type}}" class="panel-collapse collapse" ng-class="{in: type == 'entree'}">
+  <div class="panel-body">
+    <div class="form-group">
+      <label for="{{type}}_name">Name</label>
+      <input type="text" required="" class="form-control" id="{{type}}_name" ng-model="dish.name">
+    </div>
+    <label>Ingredients</label>
+    <div class="row" ng-repeat="ing in dish.ingredients">
+      <div class="col-sm-2">
+        <input type="text" class="form-control" ng-model="ing.amount">
+      </div>
+      <div class="col-sm-2">
+        <select ng-model="ing.unit" class="form-control">
+          <option></option>
+          <option ng-repeat="unit in unitChoices">{{unit}}</option>
+        </select>
+      </div>
+      <div class="col-sm-7">
+        <input type="text" class="form-control" ng-model="ing.description">
+      </div>
+      <div class="col-sm-1">
+        <button class="btn btn-danger btn-sm" ng-click="remove($index)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+      </div>
+    </div>
+    <button class="add-ingredient btn btn-success btn-sm" ng-click="add()">
+      <span class="glyphicon glyphicon-plus"></span>
+      Add Ingredient
+    </button>
+    <div class="form-group">
+      <label for="{{type}}_instructions">Instructions</label>
+      <textarea class="form-control" id="{{type}}_instructions" ng-model="dish.instructions" rows="10"></textarea>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<p>
+  <input type="search" class="form-control" placeholder="Search meals...">
+</p>
+<p>
+  <form action="/api/meals/import" method="POST" enctype="multipart/form-data" file-upload="options" ng-controller="UploadCtrl">
+    <span class="btn btn-success btn-block fileinput-button">
+      Import Meals
+      <input type="file" name="menu">
+    </span>
+  </form>
+</p>
+<div class="list-group">
+  <a ng-repeat="meal in meals" href="#/meals/{{meal._id}}" class="list-group-item" ng-class="{active: meal._id == $routeParams.mealId}">
+    <h4 class="list-group-item-heading">{{meal.entree.name}}</h4>
+    <p class="list-group-item-text">{{meal.side.name}}</p>
+  </a>
+</div>

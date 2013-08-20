@@ -1,0 +1,20 @@
+<div class="btn-group pull-right">
+  <a ng-href="#/meals/{{meal._id}}/edit" class="btn btn-primary">
+    <span class="glyphicon glyphicon-pencil"></span> Edit
+  </a>
+  <button class="btn btn-primary" ng-click="remove()">
+    <span class="glyphicon glyphicon-remove"></span> Delete
+  </button>
+</div>
+
+<h2>{{meal.entree.name}} <small>{{meal.side.name}}</small></h2>
+
+<div class="row">
+  <div class="col-md-6" ng-controller="DishShowCtrl" ng-init="type='entree'">
+    <ng-include src="'views/dish_show.html'"></ng-include>
+  </div>
+
+  <div class="col-md-6" ng-controller="DishShowCtrl" ng-init="type='side'">
+    <ng-include src="'views/dish_show.html'"></ng-include>
+  </div>
+</div>

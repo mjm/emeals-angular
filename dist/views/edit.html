@@ -1,0 +1,19 @@
+<h2>Edit Meal</h2>
+
+<form role="form" name="editMeal">
+  <div class="panel-group" id="dishes">
+    <div class="panel" ng-controller="DishEditCtrl" ng-init="type='entree'" ng-include="'views/dish_edit.html'">
+    </div>
+
+    <div class="panel" ng-controller="DishEditCtrl" ng-init="type='side'" ng-include="'views/dish_edit.html'">
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button type="submit" class="btn btn-primary" ng-click="save()" ng-disabled="editMeal.$invalid">
+      <span class="glyphicon glyphicon-ok"></span>
+      Save Meal Changes
+    </button>
+    <button class="btn btn-link" ng-click="cancel()">Cancel</button>
+  </div>
+</form>
