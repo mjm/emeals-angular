@@ -12,11 +12,3 @@ set :app_command, "server.js"
 set :app_environment, "PORT=6000"
 
 role :app, "mattmoriarity.com"
-
-after "node:install_packages", "angular:build"
-
-namespace :angular do
-  task :build do
-    run "cd #{release_path} && grunt build"
-  end
-end
