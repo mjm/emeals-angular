@@ -14,6 +14,7 @@ module.exports = function(config) {
       'app/bower_components/underscore.string/lib/underscore.string.js',
       'app/bower_components/restangular/dist/restangular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
+      'app/bower_components/jquery-file-upload/js/jquery.fileupload-angular.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
