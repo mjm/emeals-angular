@@ -23,6 +23,9 @@ if ('development' == app.get('env')) {
   app.use(express.static(path.join(__dirname, 'app')));
   app.use(express.static(path.join(__dirname, '.tmp')));
   app.use(express.errorHandler());
+} else if ('production' == app.get('env')) {
+  // TODO use nginx to handle this shizz
+  app.use(express.static(path.join(__dirname, 'dist')));
 }
 
 http.createServer(app).listen(app.get('port'), function(){

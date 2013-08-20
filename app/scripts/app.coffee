@@ -7,12 +7,12 @@ emeals.config ($routeProvider) ->
     templateUrl: 'views/show.html'
     controller: 'MealShowCtrl'
     resolve:
-      meal: (MealLoader) -> MealLoader()
+      meal: ['MealLoader', (MealLoader) -> MealLoader()]
   .when '/meals/:mealId/edit',
     templateUrl: 'views/edit.html'
     controller: 'MealEditCtrl'
     resolve:
-      meal: (MealLoader) -> MealLoader()
+      meal: ['MealLoader', (MealLoader) -> MealLoader()]
   .otherwise
     redirectTo: '/'
 
