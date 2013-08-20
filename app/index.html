@@ -31,8 +31,15 @@
 
     <!-- Add your site or application content here -->
     <div class="row">
-      <div ng-view="" class="col-sm-9 col-sm-push-3"></div>
-      <div ng-controller="MealsListCtrl" ng-include src="'views/meals.html'" class="col-sm-3 col-sm-pull-9"></div>
+      <div id="content"
+        ng-view=""
+        class="col-sm-9 col-sm-push-3"></div>
+      <div id="sidebar"
+        ng-controller="MealsListCtrl"
+        ng-include
+        src="'views/meals.html'"
+        class="col-sm-3 col-sm-pull-9">
+      </div>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
