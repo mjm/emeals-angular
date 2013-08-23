@@ -62,7 +62,9 @@ exports.importMenu = function (menu, callback) {
 };
 
 exports.getCurrentPlan = function(callback) {
-  planDb.view('plans/current', function(err, results) {
+  planDb.view('plans/current', {
+    limit: 1
+  }, function(err, results) {
     callback(err, results[0].value);
   });
 };
