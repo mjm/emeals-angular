@@ -1,7 +1,24 @@
-<h2>{{plan.name}}</h2>
-<dl>
-  <dt>Start</dt>
-  <dd>{{plan.days.start}}</dd>
-  <dt>End</dt>
-  <dd>{{plan.days.end}}</dd>
-</dl>
+<h2>
+  {{plan.name}}
+  <small>
+    {{plan.days.start | utcdate}} to {{plan.days.end | utcdate}}
+  </small>
+</h2>
+
+<div class="row" ng-repeat="(row, mealsByDay) in groupedMealsByDay">
+  <div class="col-sm-4" ng-repeat="day in mealsByDay">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          {{day.day | utcdate}}
+        </h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <li ng-repeat="meal in day.meals">{{meal.entree.name}} and {{meal.side.name}}</li>
+        </ul>
+        <p ng-show="day.meals.length == 0">No meals scheduled for this day.</p>
+      </div>
+    </div>
+  </div>
+</div>

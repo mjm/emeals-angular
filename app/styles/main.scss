@@ -24,11 +24,11 @@ body > .row {
   padding: 15px 0 15px 20px;
 }
 
-@media (min-width: 768px) {
-  body {
-    padding-top: 50px;
-  }
+body {
+  padding-top: 50px;
+}
 
+@media (min-width: 768px) {
   #sidebar {
     position: fixed;
     top: 50px;
