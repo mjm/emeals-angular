@@ -2,24 +2,26 @@ var _ = require('underscore');
 var cradle = require('cradle');
 var http = require('http');
 var fs = require('fs');
-var db = new(cradle.Connection)({cache: false}).database('meals');
+
+var mealDb = new(cradle.Connection)({cache: false}).database('meals');
+var planDb = new(cradle.Connection)({cache: false}).database('plans');
 
 exports.allMeals = function (callback) {
-  db.all({include_docs: true}, function(err, meals) {
+  mealDb.all({include_docs: true}, function(err, meals) {
     callback(err, _.pluck(meals, 'doc'));
   });
 };
 
 exports.getMeal = function (id, callback) {
-  db.get(id, callback);
+  mealDb.get(id, callback);
 };
 
 exports.updateMeal = function (meal, callback) {
-  db.save(meal._id, meal._rev, _.omit(meal, '_id', '_rev'), callback);
+  mealDb.save(meal._id, meal._rev, _.omit(meal, '_id', '_rev'), callback);
 };
 
 exports.deleteMeal = function (id, rev, callback) {
-  db.remove(id, rev, callback);
+  mealDb.remove(id, rev, callback);
 };
 
 exports.importMenu = function (menu, callback) {
@@ -37,7 +39,7 @@ exports.importMenu = function (menu, callback) {
       var results = [];
       function process(meal) {
         if (meal) {
-          db.save(meal, function (err, res) {
+          mealDb.save(meal, function (err, res) {
             results.push(res);
             process(meals.shift());
           });
@@ -56,5 +58,11 @@ exports.importMenu = function (menu, callback) {
   fs.readFile(menu, function (err, data) {
     req.write(data);
     req.end();
+  });
+};
+
+exports.getCurrentPlan = function(callback) {
+  planDb.view('plans/current', function(err, results) {
+    callback(err, results[0].value);
   });
 };

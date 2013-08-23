@@ -13,6 +13,11 @@ emeals.config ($routeProvider) ->
     controller: 'MealEditCtrl'
     resolve:
       meal: ['MealLoader', (MealLoader) -> MealLoader()]
+  .when '/plans/current',
+    templateUrl: 'views/plan.html'
+    controller: 'PlanShowCtrl'
+    resolve:
+      plan: ['PlanLoader', (PlanLoader) -> PlanLoader()]
   .otherwise
     redirectTo: '/'
 

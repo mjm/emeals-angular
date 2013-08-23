@@ -1,5 +1,6 @@
 var express = require('express');
 var meals = require('./server/meals');
+var plans = require('./server/plans');
 var http = require('http');
 var path = require('path');
 
@@ -17,6 +18,8 @@ app.get('/api/meals/:id', meals.show);
 app.put('/api/meals/:id', meals.update);
 app.delete('/api/meals/:id', meals.destroy);
 app.post('/api/meals/import', meals.import);
+
+app.get('/api/plans/current', plans.current);
 
 // development only
 if ('development' == app.get('env')) {
