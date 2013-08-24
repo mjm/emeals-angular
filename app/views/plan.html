@@ -5,17 +5,21 @@
   </small>
 </h2>
 
+<p>Drag from the sidebar onto each day to plan your meals.</p>
+
 <div class="row" ng-repeat="(row, mealsByDay) in groupedMealsByDay">
   <div class="col-sm-4" ng-repeat="day in mealsByDay">
-    <div class="panel panel-default">
+    <div class="panel panel-default" droppable ng-model="day.meals">
       <div class="panel-heading">
         <h3 class="panel-title">
-          {{day.day | utcdate}}
+          {{day.day | utcdate:'EEEE, MMMM d' }}
         </h3>
       </div>
       <div class="panel-body">
-        <ul>
-          <li ng-repeat="meal in day.meals">{{meal.entree.name}} and {{meal.side.name}}</li>
+        <ul class="list-unstyled">
+          <li ng-repeat="meal in day.meals">
+            <a ng-href="#/meals/{{meal._id}}">{{meal.entree.name}} and {{meal.side.name}}</a>
+          </li>
         </ul>
         <p ng-show="day.meals.length == 0">No meals scheduled for this day.</p>
       </div>

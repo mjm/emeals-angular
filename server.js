@@ -20,6 +20,7 @@ app.delete('/api/meals/:id', meals.destroy);
 app.post('/api/meals/import', meals.import);
 
 app.get('/api/plans/current', plans.current);
+app.put('/api/plans/:id', plans.update);
 
 // development only
 if ('development' == app.get('env')) {

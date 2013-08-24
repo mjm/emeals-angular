@@ -12,8 +12,13 @@ rangeForDays = (plan) ->
 
 mealsByDay = (plan) ->
   _.map rangeForDays(plan), (day) ->
+    plan.meals[day] ||= []
+
     day: day
-    meals: plan.meals[day] || []
+    meals: plan.meals[day]
+
+mealCount = (plan) ->
+  _.flatten(_.values(plan.meals)).length
 
 angular.module('emeals').controller 'PlanShowCtrl', ($scope, plan) ->
   $scope.$watch 'plan', ->
@@ -21,3 +26,9 @@ angular.module('emeals').controller 'PlanShowCtrl', ($scope, plan) ->
       Math.floor index / 3
 
   $scope.plan = plan
+
+  $scope.$watch (-> mealCount $scope.plan), (newValue, oldValue) ->
+    if newValue isnt oldValue
+      $scope.plan.put().then (result) ->
+        $scope.plan._rev = result.rev
+
