@@ -19,6 +19,9 @@
         <ul class="list-unstyled">
           <li ng-repeat="meal in day.meals">
             <a ng-href="#/meals/{{meal._id}}">{{meal.entree.name}} and {{meal.side.name}}</a>
+            <button type="button" class="btn btn-xs btn-link remove-meal" ng-click="remove(day.day, $index)">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
           </li>
         </ul>
         <p ng-show="day.meals.length == 0">No meals scheduled for this day.</p>
