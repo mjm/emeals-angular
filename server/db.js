@@ -65,6 +65,12 @@ exports.getCurrentPlan = function(callback) {
   planDb.view('plans/current', {
     limit: 1
   }, function(err, results) {
-    callback(err, results[0].value);
+    if (err) {
+      callback(err, null);
+    } else if (!results[0]) {
+      callback({error: 'not_found'}, null);
+    } else {
+      callback(err, results[0].value);
+    }
   });
 };
