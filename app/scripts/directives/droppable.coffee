@@ -11,4 +11,5 @@ angular.module('emeals').directive 'droppable', ->
         draggedValue = getModelValue ui.draggable
         if droppedValue and draggedValue
           unless _.contains(_.pluck(droppedValue, '_id'), draggedValue._id)
-            $scope.$apply -> droppedValue.push(draggedValue)
+            unless attrs.droppableLimit and droppedValue.length >= attrs.droppableLimit
+              $scope.$apply -> droppedValue.push(draggedValue)

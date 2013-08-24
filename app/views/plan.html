@@ -9,7 +9,7 @@
 
 <div class="row" ng-repeat="(row, mealsByDay) in groupedMealsByDay">
   <div class="col-sm-4" ng-repeat="day in mealsByDay">
-    <div class="panel panel-default" droppable ng-model="day.meals">
+    <div class="panel panel-default" droppable droppable-limit="3" ng-model="day.meals">
       <div class="panel-heading">
         <h3 class="panel-title">
           {{day.day | utcdate:'EEEE, MMMM d' }}
