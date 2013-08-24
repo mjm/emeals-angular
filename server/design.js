@@ -2,7 +2,7 @@ var plansDesign = {
   "_id": "_design/plans",
   "views": {
     "current": {
-      "map": "function(doc) { var end = new Date(doc.days.end + \"T11:59:59\"); if (end > new Date()) { emit(doc.days.start, doc); } }"
+      "map": "function(doc) { emit(doc.days.end, null); }"
     }
   }
 };

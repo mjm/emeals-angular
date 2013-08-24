@@ -62,19 +62,22 @@ exports.importMenu = function (menu, callback) {
   });
 };
 
+function today() {
+  return dateFormat('isoDate');
+}
+
+function daysLater(days) {
+  var date = new Date();
+  date.setTime(date.getTime() + days);
+  return dateFormat(date, 'isoDate');
+}
+
 function createCurrentPlan(callback) {
-  var today = new Date();
-  var end = new Date(today);
-  end.setDate(today.getDate() + 6);
-
-  var todayStr = dateFormat(today, 'isoDate');
-  var endStr   = dateFormat(end,   'isoDate');
-
   var plan = {
     name: "My Weekly Meal Plan",
     days: {
-      start: todayStr,
-      end: endStr
+      start: today(),
+      end: daysLater(6)
     },
     meals: {}
   };
@@ -92,14 +95,16 @@ function createCurrentPlan(callback) {
 
 exports.getCurrentPlan = function(callback) {
   planDb.view('plans/current', {
-    limit: 1
+    limit: 1,
+    startkey: today(),
+    include_docs: true
   }, function(err, results) {
     if (err) {
       callback(err, null);
     } else if (!results[0]) {
       createCurrentPlan(callback);
     } else {
-      callback(err, results[0].value);
+      callback(err, results[0].doc);
     }
   });
 };
