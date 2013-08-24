@@ -1,16 +1,17 @@
 describe "Controller: MealsListCtrl", ->
 
-  MealsListCtrl = scope = mealsDeferred = params = undefined
+  MealsListCtrl = MealsLoader = scope = mealsDeferred = params = undefined
 
   beforeEach module('emeals')
   beforeEach inject ($controller, $rootScope, $q) ->
     scope = $rootScope.$new()
     mealsDeferred = $q.defer()
     params = {mealId: "1"}
+    MealsLoader = jasmine.createSpy("MealsLoader").andCallFake -> mealsDeferred.promise
     MealsListCtrl = $controller 'MealsListCtrl',
       $scope: scope
       $routeParams: params
-      MealsLoader: -> mealsDeferred.promise
+      MealsLoader: MealsLoader
 
   it 'sets the meals', ->
     expect(scope.meals).not.toBeUndefined()
@@ -19,7 +20,7 @@ describe "Controller: MealsListCtrl", ->
     expect(scope.$routeParams.mealId).toEqual "1"
 
   describe "when a mealupdated event is fired", ->
-    beforeEach inject ($rootScope) ->
+    beforeEach ->
       scope.meals = [{_id:'asdf', name: 'Meal'}, {_id:'qwer', name: 'Other Meal'}]
       scope.$broadcast "mealupdated",
         _id: 'qwer'
@@ -33,7 +34,7 @@ describe "Controller: MealsListCtrl", ->
       expect(scope.meals[0].name).toEqual "Meal"
 
   describe "when a mealdeleted event is fired", ->
-    beforeEach inject ($rootScope) ->
+    beforeEach ->
       scope.meals = [{_id:'asdf', name: 'Meal'}, {_id:'qwer', name: 'Other Meal'}]
       scope.$broadcast "mealdeleted",
         _id: 'qwer'
@@ -42,3 +43,13 @@ describe "Controller: MealsListCtrl", ->
 
     it "deletes the meal from the collection", ->
       expect(scope.meals).toEqual [_id: 'asdf', name: 'Meal']
+
+  describe "when a fileuploaddone event is fired", ->
+    beforeEach ->
+      MealsLoader.reset()
+
+      scope.$broadcast "fileuploaddone"
+      scope.$apply()
+
+    it "reloads the meals list", ->
+      expect(MealsLoader).toHaveBeenCalled()
