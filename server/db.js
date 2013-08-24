@@ -2,6 +2,7 @@ var _ = require('underscore');
 var cradle = require('cradle');
 var http = require('http');
 var fs = require('fs');
+var dateFormat = require('dateformat');
 
 var mealDb = new(cradle.Connection)({cache: false}).database('meals');
 var planDb = new(cradle.Connection)({cache: false}).database('plans');
@@ -61,6 +62,34 @@ exports.importMenu = function (menu, callback) {
   });
 };
 
+function createCurrentPlan(callback) {
+  var today = new Date();
+  var end = new Date(today);
+  end.setDate(today.getDate() + 6);
+
+  var todayStr = dateFormat(today, 'isoDate');
+  var endStr   = dateFormat(end,   'isoDate');
+
+  var plan = {
+    name: "My Weekly Meal Plan",
+    days: {
+      start: todayStr,
+      end: endStr
+    },
+    meals: {}
+  };
+
+  planDb.save(plan, function (err, res) {
+    if (err) {
+      callback(err, null);
+    } else {
+      plan._id = res.id;
+      plan._rev = res.rev;
+      callback(err, plan);
+    }
+  });
+}
+
 exports.getCurrentPlan = function(callback) {
   planDb.view('plans/current', {
     limit: 1
@@ -68,7 +97,7 @@ exports.getCurrentPlan = function(callback) {
     if (err) {
       callback(err, null);
     } else if (!results[0]) {
-      callback({error: 'not_found'}, null);
+      createCurrentPlan(callback);
     } else {
       callback(err, results[0].value);
     }
