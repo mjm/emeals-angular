@@ -68,7 +68,7 @@ function today() {
 
 function daysLater(days) {
   var date = new Date();
-  date.setTime(date.getTime() + days);
+  date.setDate(date.getDate() + days);
   return dateFormat(date, 'isoDate');
 }
 
