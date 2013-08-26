@@ -6,23 +6,27 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Meal Sorter</title>
+    <title>Eats</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <link rel="stylesheet" href="styles/504633de.plugins.css">
-    <link rel="stylesheet" href="styles/d3b3b4ce.main.css">
+    <link rel="stylesheet" href="styles/b942510d.plugins.css">
+    <link rel="stylesheet" href="styles/a5c03918.main.css">
   </head>
   <body ng-app="emeals">
-    <!--[if lt IE 7]>
-      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-    <![endif]-->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="NavigationCtrl">
+      <div class="navbar-header">
+        <a class="navbar-brand">Eats</a>
+      </div>
 
-    <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
-    <![endif]-->
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li ng-class="{active: nav.isViewingMeals()}"><a href="#/meals">Meals</a></li>
+          <li ng-class="{active: nav.isViewingPlans()}"><a href="#/plans/current">Plans</a></li>
+        </ul>
+      </div>
+    </nav>
 
     <!-- Add your site or application content here -->
     <div class="row">
@@ -39,13 +43,13 @@
       s.parentNode.insertBefore(g,s)}(document,'script'));
     </script>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 
     <script src="scripts/6ec9174b.plugins.js"></script>
 
-    <script src="scripts/209638e1.modules.js"></script>
+    <script src="scripts/aa3120f5.modules.js"></script>
 
-    <script src="scripts/006ec642.scripts.js"></script>
+    <script src="scripts/fa9e0c3c.scripts.js"></script>
   </body>
 </html>

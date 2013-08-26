@@ -10,7 +10,7 @@
   </form>
 </p>
 <div class="list-group">
-  <a ng-repeat="meal in meals" href="#/meals/{{meal._id}}" class="list-group-item" ng-class="{active: meal._id == $routeParams.mealId}">
+  <a ng-repeat="meal in meals" href="#/meals/{{meal._id}}" draggable="" ng-model="meal" class="list-group-item" ng-class="{active: meal._id == $routeParams.mealId}">
     <h4 class="list-group-item-heading">{{meal.entree.name}}</h4>
     <p class="list-group-item-text">{{meal.side.name}}</p>
   </a>
