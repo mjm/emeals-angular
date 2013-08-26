@@ -109,6 +109,10 @@ exports.getCurrentPlan = function(callback) {
   });
 };
 
+exports.getPlan = function (id, callback) {
+  planDb.get(id, callback);
+};
+
 exports.updatePlan = function(plan, callback) {
   planDb.save(plan._id, plan._rev, _.omit(plan, '_id', '_rev'), callback);
 };

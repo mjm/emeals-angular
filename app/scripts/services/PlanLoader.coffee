@@ -1,2 +1,2 @@
-angular.module('emeals').factory 'PlanLoader', (Restangular) ->
-  -> Restangular.one('plans', 'current').get()
+angular.module('emeals').factory 'PlanLoader', (Restangular, $route) ->
+  -> Restangular.one('plans', $route.current.params.id).get()

@@ -13,7 +13,7 @@ emeals.config ($routeProvider) ->
     controller: 'MealEditCtrl'
     resolve:
       meal: ['MealLoader', (MealLoader) -> MealLoader()]
-  .when '/plans/current',
+  .when '/plans/:id',
     templateUrl: 'views/plan.html'
     controller: 'PlanShowCtrl'
     resolve:

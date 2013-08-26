@@ -10,6 +10,12 @@ exports.current = function(req, res) {
   });
 };
 
+exports.show = function(req, res) {
+  db.getPlan(req.params.id, function(err, result) {
+    res.send(result);
+  });
+};
+
 exports.update = function(req, res) {
   db.updatePlan(req.body, function (err, result) {
     res.send(result);
