@@ -12,18 +12,31 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <link rel="stylesheet" href="styles/b942510d.plugins.css">
-    <link rel="stylesheet" href="styles/a5c03918.main.css">
+    <link rel="stylesheet" href="styles/f0867100.main.css">
   </head>
   <body ng-app="emeals">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="NavigationCtrl">
       <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".main-nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
         <a class="navbar-brand">Eats</a>
       </div>
 
-      <div class="collapse navbar-collapse">
+      <div class="collapse navbar-collapse main-nav-collapse">
         <ul class="nav navbar-nav">
-          <li ng-class="{active: nav.isViewingMeals()}"><a href="#/meals">Meals</a></li>
-          <li ng-class="{active: nav.isViewingPlans()}"><a href="#/plans/current">Plans</a></li>
+          <li class="dropdown" ng-class="{active: nav.isViewingPlans()}">
+            <a href="#/plans/current">Menu Planning</a><!--
+            --><a class="dropdown-toggle" data-toggle="dropdown">
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="#/plans/new">New Plan</a></li>
+            </ul>
+          </li>
+          <li ng-class="{active: nav.isViewingMeals()}"><a href="#/meals">Meal Details</a></li>
         </ul>
       </div>
     </nav>
@@ -50,6 +63,6 @@
 
     <script src="scripts/aa3120f5.modules.js"></script>
 
-    <script src="scripts/fa9e0c3c.scripts.js"></script>
+    <script src="scripts/8ff9a4e4.scripts.js"></script>
   </body>
 </html>
