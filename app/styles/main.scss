@@ -32,6 +32,20 @@ body {
   cursor: copy;
 }
 
+body .nav > li > a {
+  display: inline-block;
+
+  &:nth-child(1) {
+    padding-right: 7px;
+  }
+  &:nth-child(2) {
+    padding-left: 7px;
+  }
+  &:only-of-type {
+    padding-right: 15px;
+  }
+}
+
 @media (min-width: 768px) {
   #sidebar {
     position: fixed;

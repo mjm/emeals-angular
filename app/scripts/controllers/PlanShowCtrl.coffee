@@ -1,6 +1,6 @@
 # Returns a list of all the day keys between the plan's
 # start and end day, inclusive.
-rangeForDays = (plan) ->
+rangeForDays = (plan, format) ->
   currentDate = new Date(plan.days.start)
   endDate = new Date(plan.days.end)
   days = []
@@ -8,10 +8,10 @@ rangeForDays = (plan) ->
     days.push currentDate
     currentDate = new Date(currentDate)
     currentDate.setDate currentDate.getDate() + 1
-  _.map days, (date) -> date.toJSON().slice(0, 10)
+  _.map days, format
 
-mealsByDay = (plan) ->
-  _.map rangeForDays(plan), (day) ->
+mealsByDay = (plan, format) ->
+  _.map rangeForDays(plan, format), (day) ->
     plan.meals[day] ||= []
 
     day: day
@@ -20,14 +20,14 @@ mealsByDay = (plan) ->
 mealCount = (plan) ->
   _.flatten(_.values(plan.meals)).length
 
-angular.module('emeals').controller 'PlanShowCtrl', ($scope, plan) ->
+angular.module('emeals').controller 'PlanShowCtrl', ($scope, plan, Dates) ->
   $scope.plan = plan
 
   $scope.remove = (day, index) ->
     $scope.plan.meals[day].splice(index, 1)
 
   $scope.$watch 'plan', ->
-    $scope.groupedMealsByDay = _.groupBy mealsByDay($scope.plan), (value, index) ->
+    $scope.groupedMealsByDay = _.groupBy mealsByDay($scope.plan, Dates.format), (value, index) ->
       Math.floor index / 3
 
   $scope.$watch (-> mealCount $scope.plan), (newValue, oldValue) ->

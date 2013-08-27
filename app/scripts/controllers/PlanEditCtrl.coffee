@@ -1,5 +1,6 @@
 angular.module('emeals').controller 'PlanEditCtrl', ($scope, plan, $location) ->
   $scope.plan = plan
+  $scope.isNew = false
 
   $scope.cancel = ->
     $location.path "/plans/#{plan._id}"

@@ -13,6 +13,9 @@ emeals.config ($routeProvider) ->
     controller: 'MealEditCtrl'
     resolve:
       meal: ['MealLoader', (MealLoader) -> MealLoader()]
+  .when '/plans/new',
+    templateUrl: 'views/plan_edit.html'
+    controller: 'PlanNewCtrl'
   .when '/plans/:id',
     templateUrl: 'views/plan.html'
     controller: 'PlanShowCtrl'
@@ -30,8 +33,5 @@ emeals.config (RestangularProvider) ->
   RestangularProvider.setBaseUrl "/api"
   RestangularProvider.setRestangularFields
     id: "_id"
-
-#emeals.config ($locationProvider) ->
-  #$locationProvider.html5Mode true
 
 _.mixin _.string.exports()

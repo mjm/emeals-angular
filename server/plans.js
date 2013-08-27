@@ -16,6 +16,12 @@ exports.show = function(req, res) {
   });
 };
 
+exports.create = function(req, res) {
+  db.createPlan(req.body, function(err, result) {
+    res.send(result);
+  });
+}
+
 exports.update = function(req, res) {
   db.updatePlan(req.body, function (err, result) {
     res.send(result);
