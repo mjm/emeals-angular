@@ -1,27 +1,20 @@
 var meals = require('./db/meals');
+var errors = require('./errors');
 
 exports.index = function(req, res) {
-  meals.all(function(err, meals) {
-    res.send(meals);
-  });
+  meals.all(errors.handler(res));
 };
 
 exports.show = function(req, res) {
-  meals.get(req.params.id, function (err, meal) {
-    res.send(meal);
-  });
+  meals.get(req.params.id, errors.handler(res));
 };
 
 exports.update = function(req, res) {
-  meals.update(req.body, function (err, result) {
-    res.send(result);
-  });
+  meals.update(req.body, errors.handler(res));
 };
 
 exports.destroy = function(req, res) {
-  meals.delete(req.params.id, req.query._rev, function (err, result) {
-    res.send(result);
-  });
+  meals.delete(req.params.id, req.query._rev, errors.handler(res));
 };
 
 exports.import = function(req, res) {

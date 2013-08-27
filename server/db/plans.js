@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var cradle = require('cradle');
 var dateFormat = require('dateformat');
 

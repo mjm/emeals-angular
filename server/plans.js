@@ -1,29 +1,18 @@
 var db = require('./db/plans');
+var errors = require('./errors');
 
 exports.current = function(req, res) {
-  db.getCurrent(function(err, plan) {
-    if (err) {
-      res.send(404, "");
-    } else {
-      res.send(200, plan);
-    }
-  });
+  db.getCurrent(errors.handler(res));
 };
 
 exports.show = function(req, res) {
-  db.get(req.params.id, function(err, result) {
-    res.send(result);
-  });
+  db.get(req.params.id, errors.handler(res));
 };
 
 exports.create = function(req, res) {
-  db.create(req.body, function(err, result) {
-    res.send(result);
-  });
+  db.create(req.body, errors.handler(res));
 }
 
 exports.update = function(req, res) {
-  db.update(req.body, function (err, result) {
-    res.send(result);
-  });
+  db.update(req.body, errors.handler(res));
 };
