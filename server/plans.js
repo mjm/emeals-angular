@@ -1,7 +1,7 @@
-var db = require('./db');
+var db = require('./db/plans');
 
 exports.current = function(req, res) {
-  db.getCurrentPlan(function(err, plan) {
+  db.getCurrent(function(err, plan) {
     if (err) {
       res.send(404, "");
     } else {
@@ -11,19 +11,19 @@ exports.current = function(req, res) {
 };
 
 exports.show = function(req, res) {
-  db.getPlan(req.params.id, function(err, result) {
+  db.get(req.params.id, function(err, result) {
     res.send(result);
   });
 };
 
 exports.create = function(req, res) {
-  db.createPlan(req.body, function(err, result) {
+  db.create(req.body, function(err, result) {
     res.send(result);
   });
 }
 
 exports.update = function(req, res) {
-  db.updatePlan(req.body, function (err, result) {
+  db.update(req.body, function (err, result) {
     res.send(result);
   });
 };
