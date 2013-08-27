@@ -1,4 +1,4 @@
-angular.module('emeals').controller 'MealsListCtrl', ($scope, $routeParams, MealsLoader) ->
+angular.module('emeals').controller 'MealsListCtrl', ($scope, $routeParams, MealsLoader, Navigation) ->
   loadMeals = ->
     $scope.meals = MealsLoader()
     $scope.meals.then (meals) ->
@@ -6,6 +6,7 @@ angular.module('emeals').controller 'MealsListCtrl', ($scope, $routeParams, Meal
 
   loadMeals()
   $scope.$routeParams = $routeParams
+  $scope.nav = Navigation
 
   $scope.$on "mealupdated", (e, meal) ->
     existingMeal = _.find $scope.meals, _id: meal._id
