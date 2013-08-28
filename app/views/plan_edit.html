@@ -32,3 +32,21 @@
   <button class="btn btn-primary" ng-click="save()">Save Changes</button>
   <button class="btn btn-link" ng-click="cancel()">Cancel</button>
 </form>
+
+<div ng-hide="isNew">
+  <h3>Scheduled Meals</h3>
+  <p>Meals in <span class="hidden_meal">red</span> fall outside the current day range for
+  the plan and won't be shown.</p>
+  <dl class="dl-horizontal">
+    <span ng-repeat="day in mealsByDay"
+          ng-hide="day.meals.length == 0"
+          ng-class="{hidden_meal: isDayHidden(day.day)}">
+      <dt>{{day.day}}</dt>
+      <dd>
+        <ul>
+          <li ng-repeat="meal in day.meals">{{meal.entree.name}} and {{meal.side.name}}</li>
+        </ul>
+      </dd>
+    </span>
+  </dl>
+</div>

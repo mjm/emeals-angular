@@ -46,6 +46,10 @@ body .nav > li > a {
   }
 }
 
+.hidden_meal {
+  color: red;
+}
+
 @media (min-width: 768px) {
   #sidebar {
     position: fixed;
