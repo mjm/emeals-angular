@@ -7,12 +7,12 @@ emeals.config ($routeProvider) ->
     templateUrl: 'views/show.html'
     controller: 'MealShowCtrl'
     resolve:
-      meal: ['MealLoader', (MealLoader) -> MealLoader()]
+      meal: ['Meals', (Meals) -> Meals.load()]
   .when '/meals/:mealId/edit',
     templateUrl: 'views/edit.html'
     controller: 'MealEditCtrl'
     resolve:
-      meal: ['MealLoader', (MealLoader) -> MealLoader()]
+      meal: ['Meals', (Meals) -> Meals.load()]
   .when '/plans/new',
     templateUrl: 'views/plan_edit.html'
     controller: 'PlanNewCtrl'
@@ -20,12 +20,12 @@ emeals.config ($routeProvider) ->
     templateUrl: 'views/plan.html'
     controller: 'PlanShowCtrl'
     resolve:
-      plan: ['PlanLoader', (PlanLoader) -> PlanLoader()]
+      plan: ['Plans', (Plans) -> Plans.load()]
   .when '/plans/:id/edit',
     templateUrl: 'views/plan_edit.html'
     controller: 'PlanEditCtrl'
     resolve:
-      plan: ['PlanLoader', (PlanLoader) -> PlanLoader()]
+      plan: ['Plans', (Plans) -> Plans.load()]
   .otherwise
     redirectTo: '/'
 

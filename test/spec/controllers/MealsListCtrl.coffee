@@ -1,17 +1,17 @@
 describe "Controller: MealsListCtrl", ->
 
-  MealsListCtrl = MealsLoader = scope = mealsDeferred = params = undefined
+  MealsListCtrl = Meals = scope = mealsDeferred = params = undefined
 
   beforeEach module('emeals')
   beforeEach inject ($controller, $rootScope, $q) ->
     scope = $rootScope.$new()
     mealsDeferred = $q.defer()
     params = {mealId: "1"}
-    MealsLoader = jasmine.createSpy("MealsLoader").andCallFake -> mealsDeferred.promise
+    Meals = {all: jasmine.createSpy("MealsLoader").andCallFake -> mealsDeferred.promise}
     MealsListCtrl = $controller 'MealsListCtrl',
       $scope: scope
       $routeParams: params
-      MealsLoader: MealsLoader
+      Meals: Meals
 
   it 'sets the meals', ->
     expect(scope.meals).not.toBeUndefined()
@@ -46,10 +46,10 @@ describe "Controller: MealsListCtrl", ->
 
   describe "when a fileuploaddone event is fired", ->
     beforeEach ->
-      MealsLoader.reset()
+      Meals.all.reset()
 
       scope.$broadcast "fileuploaddone"
       scope.$apply()
 
     it "reloads the meals list", ->
-      expect(MealsLoader).toHaveBeenCalled()
+      expect(Meals.all).toHaveBeenCalled()

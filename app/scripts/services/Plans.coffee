@@ -1,5 +1,8 @@
-angular.module('emeals').factory 'Plans', (Dates) ->
+angular.module('emeals').factory 'Plans', (Dates, Restangular, $route) ->
   Plans =
+    load: ->
+      Restangular.one('plans', $route.current.params.id).get()
+
     # Returns a list of all the day keys between the plan's
     # start and end day, inclusive.
     rangeForDays: (plan) ->

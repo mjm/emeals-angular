@@ -2,7 +2,9 @@ describe 'Controller: PlanShowCtrl', ->
   plan = scope = putDeferred = undefined
 
   beforeEach module 'emeals'
-  beforeEach inject ($rootScope, $controller, $q) ->
+  beforeEach inject ($rootScope, $controller, $q, $httpBackend) ->
+    $httpBackend.whenGET('views/home.html').respond({}) # ugh
+
     scope = $rootScope.$new()
     putDeferred = $q.defer()
     $controller 'PlanShowCtrl',
