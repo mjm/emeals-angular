@@ -1,5 +1,5 @@
 <div class="btn-group pull-right">
-  <a class="btn btn-primary" ng-href="#/plans/{{plan._id}}/edit">
+  <a class="btn btn-primary" ng-href="/plans/{{plan._id}}/edit">
     <span class="glyphicon glyphicon-pencil"></span> Edit Details
   </a>
 </div>
@@ -24,7 +24,7 @@
       <div class="panel-body">
         <ul class="list-unstyled">
           <li ng-repeat="meal in day.meals">
-            <a ng-href="#/meals/{{meal._id}}">{{meal.entree.name}} and {{meal.side.name}}</a>
+            <a ng-href="/meals/{{meal._id}}">{{meal.entree.name}} and {{meal.side.name}}</a>
             <button type="button" class="btn btn-xs btn-link remove-meal" ng-click="remove(day.day, $index)">
               <span class="glyphicon glyphicon-remove"></span>
             </button>

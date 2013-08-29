@@ -28,11 +28,13 @@ app.put('/api/plans/:id', plans.update);
 if ('development' == app.get('env')) {
   app.use(express.static(path.join(__dirname, 'app')));
   app.use(express.static(path.join(__dirname, '.tmp')));
+  app.use(function(req, res, next) {
+    res.sendfile(path.join(__dirname, 'app/index.html'));
+  });
   app.use(express.errorHandler());
-} else if ('production' == app.get('env')) {
-  // TODO use nginx to handle this shizz
-  app.use(express.static(path.join(__dirname, 'dist')));
 }
+
+// production should have nginx serve static assets
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

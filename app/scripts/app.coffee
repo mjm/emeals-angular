@@ -34,4 +34,7 @@ emeals.config (RestangularProvider) ->
   RestangularProvider.setRestangularFields
     id: "_id"
 
+emeals.config ($locationProvider) ->
+  $locationProvider.html5Mode(true)
+
 _.mixin _.string.exports()
