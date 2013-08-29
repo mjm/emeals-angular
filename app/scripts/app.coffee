@@ -2,27 +2,27 @@ emeals = angular.module('emeals', ['restangular', 'blueimp.fileupload'])
 
 emeals.config ($routeProvider) ->
   $routeProvider.when '/',
-    templateUrl: 'views/home.html'
+    templateUrl: 'views/meals/home.html'
   .when '/meals/:mealId',
-    templateUrl: 'views/show.html'
+    templateUrl: 'views/meals/show.html'
     controller: 'MealShowCtrl'
     resolve:
       meal: ['Meals', (Meals) -> Meals.load()]
   .when '/meals/:mealId/edit',
-    templateUrl: 'views/edit.html'
+    templateUrl: 'views/meals/edit.html'
     controller: 'MealEditCtrl'
     resolve:
       meal: ['Meals', (Meals) -> Meals.load()]
   .when '/plans/new',
-    templateUrl: 'views/plan_edit.html'
+    templateUrl: 'views/plans/edit.html'
     controller: 'PlanNewCtrl'
   .when '/plans/:id',
-    templateUrl: 'views/plan.html'
+    templateUrl: 'views/plans/show.html'
     controller: 'PlanShowCtrl'
     resolve:
       plan: ['Plans', (Plans) -> Plans.load()]
   .when '/plans/:id/edit',
-    templateUrl: 'views/plan_edit.html'
+    templateUrl: 'views/plans/edit.html'
     controller: 'PlanEditCtrl'
     resolve:
       plan: ['Plans', (Plans) -> Plans.load()]
