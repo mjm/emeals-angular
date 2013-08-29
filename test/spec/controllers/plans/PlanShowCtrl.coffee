@@ -3,7 +3,7 @@ describe 'Controller: PlanShowCtrl', ->
 
   beforeEach module 'emeals'
   beforeEach inject ($rootScope, $controller, $q, $httpBackend) ->
-    $httpBackend.whenGET('views/home.html').respond({}) # ugh
+    $httpBackend.whenGET('views/meals/home.html').respond({}) # ugh
 
     scope = $rootScope.$new()
     putDeferred = $q.defer()
