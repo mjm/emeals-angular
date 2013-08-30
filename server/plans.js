@@ -5,6 +5,10 @@ exports.current = function(req, res) {
   db.getCurrent(errors.handler(res));
 };
 
+exports.past = function(req, res) {
+  db.allPast(errors.handler(res));
+};
+
 exports.show = function(req, res) {
   db.get(req.params.id, errors.handler(res));
 };

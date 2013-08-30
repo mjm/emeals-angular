@@ -6,6 +6,9 @@ angular.module('emeals.services').factory 'Plans', (Dates, Restangular, $route) 
     create: (plan) ->
       Restangular.all('plans').post(plan)
 
+    past: ->
+      Restangular.all('plans').customGETLIST('past')
+
     # Returns a list of all the day keys between the plan's
     # start and end day, inclusive.
     rangeForDays: (plan) ->

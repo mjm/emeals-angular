@@ -21,6 +21,12 @@ emeals.config ($routeProvider) ->
     resolve:
       meal: ['Meals', (Meals) -> Meals.load()]
 
+  .when '/plans',
+    templateUrl: 'views/plans/list.html'
+    controller: 'PlanListCtrl'
+    resolve:
+      pastPlans: ['Plans', (Plans) -> Plans.past()]
+
   .when '/plans/new',
     templateUrl: 'views/plans/edit.html'
     controller: 'PlanNewCtrl'

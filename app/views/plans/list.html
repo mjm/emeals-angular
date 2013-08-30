@@ -1,0 +1,27 @@
+<div class="pull-right">
+  <a href="/plans/new" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus"></span>
+    Create New Plan
+  </a>
+</div>
+
+<h2>Your Meal Plans</h2>
+
+<h3>Past Plans</h3>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <th>Days</th>
+      <th>Plan Name</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="plan in pastPlans">
+        <td>{{plan.days.start | utcdate}} to {{plan.days.end | utcdate}}</td>
+        <td>
+          <a ng-href="/plans/{{plan._id}}">{{plan.name}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
