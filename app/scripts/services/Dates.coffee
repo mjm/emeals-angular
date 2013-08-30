@@ -1,4 +1,4 @@
-angular.module('emeals').factory 'Dates', ->
+angular.module('emeals.services').factory 'Dates', ->
   Dates =
     format: (date) ->
       date.toJSON().slice(0, 10)

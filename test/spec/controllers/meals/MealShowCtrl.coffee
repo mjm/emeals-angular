@@ -2,7 +2,7 @@ describe "Controller: MealShowCtrl", ->
 
   MealShowCtrl = scope = meal = undefined
 
-  beforeEach module('emeals')
+  beforeEach module('emeals.controllers')
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
     meal =

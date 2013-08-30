@@ -1,4 +1,4 @@
-angular.module('emeals').controller 'DishEditCtrl', ($scope) ->
+angular.module('emeals.controllers').controller 'DishEditCtrl', ($scope) ->
   $scope.unitChoices = [
     "teaspoon",
     "tablespoon",

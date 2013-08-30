@@ -1,7 +1,7 @@
 describe 'Controller: PlanShowCtrl', ->
   plan = scope = putDeferred = undefined
 
-  beforeEach module 'emeals'
+  beforeEach module 'emeals.controllers'
   beforeEach inject ($rootScope, $controller, $q, $httpBackend) ->
     $httpBackend.whenGET('views/meals/home.html').respond({}) # ugh
 

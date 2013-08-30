@@ -1,4 +1,4 @@
-angular.module('emeals').controller 'PlanNewCtrl', ($scope, Dates, $location, Restangular) ->
+angular.module('emeals.controllers').controller 'PlanNewCtrl', ($scope, Dates, $location) ->
   $scope.plan =
     name: ""
     days:
@@ -11,5 +11,5 @@ angular.module('emeals').controller 'PlanNewCtrl', ($scope, Dates, $location, Re
     $location.path '/plans/current'
 
   $scope.save = ->
-    Restangular.all('plans').post($scope.plan).then (result) ->
+    Plans.create($scope.plan).then (result) ->
       $location.path "/plans/#{result.id}"

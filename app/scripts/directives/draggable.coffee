@@ -1,4 +1,4 @@
-angular.module('emeals').directive 'draggable', ($location, Navigation) ->
+angular.module('emeals.directives').directive 'draggable', ($location, Navigation) ->
   restrict: 'A'
   link: ($scope, elem, attrs) ->
     elem.draggable

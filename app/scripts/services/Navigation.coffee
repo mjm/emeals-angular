@@ -1,4 +1,4 @@
-angular.module('emeals').factory 'Navigation', ($location) ->
+angular.module('emeals.services').factory 'Navigation', ($location) ->
   isViewingMeals: ->
     /^\/($|meals)/.test $location.path()
 

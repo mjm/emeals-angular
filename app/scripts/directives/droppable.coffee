@@ -1,7 +1,7 @@
 getModelValue = (elem) ->
   elem.scope().$eval(elem.attr 'ng-model') if elem.attr 'ng-model'
 
-angular.module('emeals').directive 'droppable', ->
+angular.module('emeals.directives').directive 'droppable', ->
   restrict: 'A'
   link: ($scope, elem, attrs) ->
     elem.droppable

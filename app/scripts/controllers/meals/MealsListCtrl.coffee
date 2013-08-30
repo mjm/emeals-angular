@@ -1,4 +1,4 @@
-angular.module('emeals').controller 'MealsListCtrl', ($scope, $routeParams, Meals, Navigation) ->
+angular.module('emeals.controllers').controller 'MealsListCtrl', ($scope, $routeParams, Meals, Navigation) ->
   loadMeals = ->
     $scope.meals = Meals.all()
     $scope.meals.then (meals) ->

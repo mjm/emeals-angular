@@ -1,4 +1,4 @@
-angular.module('emeals').controller 'MealShowCtrl', ($scope, $rootScope, $location, $window, meal) ->
+angular.module('emeals.controllers').controller 'MealShowCtrl', ($scope, $rootScope, $location, $window, meal) ->
   $scope.meal = meal
 
   $scope.remove = ->

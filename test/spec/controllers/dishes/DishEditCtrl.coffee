@@ -1,7 +1,7 @@
 describe "Controller: DishEditCtrl", ->
   DishEditCtrl = scope = undefined
 
-  beforeEach(module('emeals'))
+  beforeEach module('emeals.controllers')
 
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()

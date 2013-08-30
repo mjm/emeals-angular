@@ -2,7 +2,7 @@ describe "Controller: MealsListCtrl", ->
 
   MealsListCtrl = Meals = scope = mealsDeferred = params = undefined
 
-  beforeEach module('emeals')
+  beforeEach module('emeals.controllers')
   beforeEach inject ($controller, $rootScope, $q) ->
     scope = $rootScope.$new()
     mealsDeferred = $q.defer()

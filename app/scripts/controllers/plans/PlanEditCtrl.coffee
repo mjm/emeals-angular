@@ -1,4 +1,4 @@
-angular.module('emeals').controller 'PlanEditCtrl', ($scope, plan, $location) ->
+angular.module('emeals.controllers').controller 'PlanEditCtrl', ($scope, plan, $location) ->
   $scope.plan = plan
   $scope.isNew = false
 

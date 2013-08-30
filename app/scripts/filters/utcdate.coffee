@@ -1,4 +1,4 @@
-angular.module('emeals').filter 'utcdate', ($filter) ->
+angular.module('emeals.filters').filter 'utcdate', ($filter) ->
   (input, format='mediumDate') ->
     if typeof input is "string"
       localDate = new Date(input)

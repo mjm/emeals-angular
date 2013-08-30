@@ -1,2 +1,2 @@
-angular.module('emeals').filter 'capitalize', ->
+angular.module('emeals.filters').filter 'capitalize', ->
   (input) -> _.capitalize(input)

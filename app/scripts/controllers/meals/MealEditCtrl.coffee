@@ -1,4 +1,4 @@
-angular.module('emeals').controller 'MealEditCtrl', ($scope, $rootScope, $location, meal) ->
+angular.module('emeals.controllers').controller 'MealEditCtrl', ($scope, $rootScope, $location, meal) ->
   $scope.meal = meal
 
   $scope.cancel = ->

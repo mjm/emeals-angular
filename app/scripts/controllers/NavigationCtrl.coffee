@@ -1,2 +1,2 @@
-angular.module('emeals').controller 'NavigationCtrl', ($scope, Navigation) ->
+angular.module('emeals.controllers').controller 'NavigationCtrl', ($scope, Navigation) ->
   $scope.nav = Navigation

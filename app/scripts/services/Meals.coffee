@@ -1,4 +1,4 @@
-angular.module('emeals').factory 'Meals', (Restangular, $route) ->
+angular.module('emeals.services').factory 'Meals', (Restangular, $route) ->
   Meals =
     all: ->
       Restangular.all('meals').getList()

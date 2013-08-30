@@ -1,4 +1,4 @@
-angular.module('emeals').directive 'lineList', () ->
+angular.module('emeals.directives').directive 'lineList', ->
   scope:
     text: '=text'
   restrict: 'EA'
