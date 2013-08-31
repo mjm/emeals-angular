@@ -25,7 +25,8 @@ emeals.config ($routeProvider) ->
     templateUrl: 'views/plans/list.html'
     controller: 'PlanListCtrl'
     resolve:
-      pastPlans: ['Plans', (Plans) -> Plans.past()]
+      pastPlans:   ['Plans', (Plans) -> Plans.past()]
+      futurePlans: ['Plans', (Plans) -> Plans.future()]
 
   .when '/plans/new',
     templateUrl: 'views/plans/edit.html'

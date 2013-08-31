@@ -8,20 +8,11 @@
 <h2>Your Meal Plans</h2>
 
 <h3>Past Plans</h3>
+<let name="plans" value="pastPlans">
+  <ng-include src="'views/plans/table.html'"></ng-include>
+</let>
 
-<div class="table-responsive">
-  <table class="table table-striped">
-    <thead>
-      <th>Days</th>
-      <th>Plan Name</th>
-    </thead>
-    <tbody>
-      <tr ng-repeat="plan in pastPlans">
-        <td>{{plan.days.start | utcdate}} to {{plan.days.end | utcdate}}</td>
-        <td>
-          <a ng-href="/plans/{{plan._id}}">{{plan.name}}</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<h3>Future Plans</h3>
+<let name="plans" value="futurePlans">
+  <ng-include src="'views/plans/table.html'"></ng-include>
+</let>

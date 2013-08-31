@@ -21,6 +21,7 @@ app.post('/api/meals/import', meals.import);
 
 app.post('/api/plans', plans.create);
 app.get('/api/plans/past', plans.past);
+app.get('/api/plans/future', plans.future);
 app.get('/api/plans/current', plans.current);
 app.get('/api/plans/:id', plans.show);
 app.put('/api/plans/:id', plans.update);

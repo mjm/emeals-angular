@@ -1,4 +1,4 @@
-angular.module('emeals.controllers').controller 'PlanNewCtrl', ($scope, Dates, $location) ->
+angular.module('emeals.controllers').controller 'PlanNewCtrl', ($scope, Dates, $location, Plans) ->
   $scope.plan =
     name: ""
     days:

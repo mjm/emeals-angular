@@ -62,6 +62,18 @@ exports.allPast = function(callback) {
   });
 };
 
+exports.allFuture = function(callback) {
+  db.view('plans/current', {
+    startkey: today(),
+    skip: 1,
+    include_docs: true
+  }, function(err, results) {
+    callback(err, _.map(results, function (result) {
+      return result.doc;
+    }));
+  });
+};
+
 exports.get = function (id, callback) {
   db.get(id, callback);
 };

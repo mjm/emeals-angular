@@ -9,6 +9,10 @@ exports.past = function(req, res) {
   db.allPast(errors.handler(res));
 };
 
+exports.future = function(req, res) {
+  db.allFuture(errors.handler(res));
+};
+
 exports.show = function(req, res) {
   db.get(req.params.id, errors.handler(res));
 };
