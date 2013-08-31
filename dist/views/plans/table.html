@@ -1,0 +1,16 @@
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <th>Days</th>
+      <th>Plan Name</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="plan in plans">
+        <td>{{plan.days.start | utcdate}} to {{plan.days.end | utcdate}}</td>
+        <td>
+          <a ng-href="/plans/{{plan._id}}">{{plan.name}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

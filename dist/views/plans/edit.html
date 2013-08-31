@@ -3,6 +3,7 @@
   <span ng-show="isNew">New</span>
   Plan
 </h2>
+
 <form role="form" name="editPlan">
   <div class="row">
     <div class="col-md-12">
@@ -37,7 +38,7 @@
   <h3>Scheduled Meals</h3>
   <p>Meals in <span class="hidden_meal">red</span> fall outside the current day range for
   the plan and won't be shown.</p>
-  <dl class="dl-horizontal">
+  <dl class="dl-horizontal" ng-controller="ScheduledMealsCtrl">
     <span ng-repeat="day in mealsByDay" ng-hide="day.meals.length == 0" ng-class="{hidden_meal: isDayHidden(day.day)}">
       <dt>{{day.day}}</dt>
       <dd>

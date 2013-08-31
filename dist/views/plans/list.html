@@ -1,0 +1,18 @@
+<div class="pull-right">
+  <a href="/plans/new" class="btn btn-success">
+    <span class="glyphicon glyphicon-plus"></span>
+    Create New Plan
+  </a>
+</div>
+
+<h2>Your Meal Plans</h2>
+
+<h3>Past Plans</h3>
+<let name="plans" value="pastPlans">
+  <ng-include src="'views/plans/table.html'"></ng-include>
+</let>
+
+<h3>Future Plans</h3>
+<let name="plans" value="futurePlans">
+  <ng-include src="'views/plans/table.html'"></ng-include>
+</let>
