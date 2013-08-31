@@ -1,6 +1,5 @@
 var _ = require('underscore');
-var http = require('http');
-var fs = require('fs');
+var exec = require('child_process').exec;
 
 var cradle = require('cradle');
 var db = new(cradle.Connection)({cache: false}).database('meals');
@@ -24,17 +23,11 @@ exports.delete = function (id, rev, callback) {
 };
 
 exports.import = function (menu, callback) {
-  var req = http.request({
-    host: "localhost",
-    port: 4567,
-    path: "/import",
-    method: "POST",
-    headers: {
-      'Content-type': 'application/pdf'
-    }
-  }, function (res) {
-    res.on('data', function(data) {
-      var meals = JSON.parse(data);
+  exec('menu_to_json ' + menu, function(err, stdout, stderr) {
+    if (err) {
+      callback(err, stderr);
+    } else {
+      var meals = JSON.parse(stdout);
       var results = [];
       function process(meal) {
         if (meal) {
@@ -47,15 +40,6 @@ exports.import = function (menu, callback) {
         }
       }
       process(meals.shift());
-    });
-  });
-
-  req.on('error', function (err) {
-    callback(err, null);
-  });
-
-  fs.readFile(menu, function (err, data) {
-    req.write(data);
-    req.end();
+    }
   });
 };
