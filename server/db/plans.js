@@ -85,3 +85,7 @@ exports.create = function(plan, callback) {
 exports.update = function(plan, callback) {
   db.save(plan._id, plan._rev, _.omit(plan, '_id', '_rev'), callback);
 };
+
+exports.delete = function(id, rev, callback) {
+  db.remove(id, rev, callback);
+};

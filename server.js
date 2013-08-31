@@ -1,6 +1,4 @@
 var express = require('express');
-var meals = require('./server/meals');
-var plans = require('./server/plans');
 var http = require('http');
 var path = require('path');
 
@@ -13,18 +11,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 
-app.get('/api/meals', meals.index);
-app.get('/api/meals/:id', meals.show);
-app.put('/api/meals/:id', meals.update);
-app.delete('/api/meals/:id', meals.destroy);
-app.post('/api/meals/import', meals.import);
-
-app.post('/api/plans', plans.create);
-app.get('/api/plans/past', plans.past);
-app.get('/api/plans/future', plans.future);
-app.get('/api/plans/current', plans.current);
-app.get('/api/plans/:id', plans.show);
-app.put('/api/plans/:id', plans.update);
+require('./server/routes')(app);
 
 // development only
 if ('development' == app.get('env')) {

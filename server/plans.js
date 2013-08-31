@@ -24,3 +24,7 @@ exports.create = function(req, res) {
 exports.update = function(req, res) {
   db.update(req.body, errors.handler(res));
 };
+
+exports.destroy = function(req, res) {
+  db.delete(req.params.id, req.query._rev, errors.handler(res));
+};
