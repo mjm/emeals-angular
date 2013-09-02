@@ -1,3 +1,5 @@
+@import "compass/css3/text-shadow";
+
 $iconSpritePath: "../images/glyphicons-halflings.png";
 $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
@@ -64,4 +66,31 @@ body .nav > li > a {
 button.remove-meal {
   color: #d9534f;
   line-height: 1.2;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
+  font-size: 130%;
+  @include text-shadow(rgba(0, 0, 0, 0.8) 2px 2px 1px);
+  display: none;
+  z-index: 100;
+  width: 25%;
+  margin-left: -15px;
+  line-height: 100%;
+}
+
+.hover .overlay {
+  display: table;
+
+  & .overlay-text{
+    display: table-cell;
+    vertical-align: middle;
+  }
 }
