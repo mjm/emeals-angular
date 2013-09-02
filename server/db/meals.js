@@ -6,8 +6,14 @@ var cradle = require('cradle');
 var db = new(cradle.Connection)({cache: false}).database('meals');
 
 exports.all = function (callback) {
-  db.all({include_docs: true}, function(err, meals) {
-    callback(err, _.pluck(meals, 'doc'));
+  db.view('meals/by_entree_name', {
+    include_docs: true
+  }, function(err, results) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(err, _.pluck(results, 'doc'));
+    }
   });
 };
 
