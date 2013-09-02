@@ -1,9 +1,9 @@
 describe "Controller: MealsListCtrl", ->
   beforeEach module('emeals.controllers')
   beforeEach inject ($controller, $rootScope, $q) ->
-    mealsDeferred = $q.defer()
+    @mealsDeferred = $q.defer()
     @scope = $rootScope.$new()
-    @meals = {all: jasmine.createSpy("Meals").andReturn mealsDeferred.promise}
+    @meals = {search: jasmine.createSpy("Meals").andReturn @mealsDeferred.promise}
     $controller 'MealsListCtrl',
       $scope: @scope
       $routeParams:
@@ -18,6 +18,9 @@ describe "Controller: MealsListCtrl", ->
 
   describe "when a mealupdated event is fired", ->
     beforeEach ->
+      @scope.$apply =>
+        @mealsDeferred.resolve()
+
       @scope.meals = [{_id:'asdf', name: 'Meal'}, {_id:'qwer', name: 'Other Meal'}]
       @scope.$apply =>
         @scope.$broadcast "mealupdated",
@@ -32,6 +35,9 @@ describe "Controller: MealsListCtrl", ->
 
   describe "when a mealdeleted event is fired", ->
     beforeEach ->
+      @scope.$apply =>
+        @mealsDeferred.resolve()
+
       @scope.meals = [{_id:'asdf', name: 'Meal'}, {_id:'qwer', name: 'Other Meal'}]
       @scope.$apply =>
         @scope.$broadcast "mealdeleted",
@@ -43,8 +49,8 @@ describe "Controller: MealsListCtrl", ->
 
   describe "when a fileuploaddone event is fired", ->
     beforeEach ->
-      @meals.all.reset()
+      @meals.search.reset()
       @scope.$apply => @scope.$broadcast "fileuploaddone"
 
     it "reloads the meals list", ->
-      expect(@meals.all).toHaveBeenCalled()
+      expect(@meals.search).toHaveBeenCalled()

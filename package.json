@@ -21,7 +21,8 @@
     "express": "3.3.5",
     "underscore": "~1.5.1",
     "cradle": "~0.6.6",
-    "dateformat": "~1.0.6-1.2.3"
+    "dateformat": "~1.0.6-1.2.3",
+    "elastic.js": "~1.1.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

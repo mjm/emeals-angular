@@ -5,6 +5,10 @@ exports.index = function(req, res) {
   meals.all(errors.handler(res));
 };
 
+exports.search = function(req, res) {
+  meals.search(req.query.q, errors.handler(res));
+};
+
 exports.show = function(req, res) {
   meals.get(req.params.id, errors.handler(res));
 };

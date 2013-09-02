@@ -5,6 +5,11 @@ var path = require('path');
 var cradle = require('cradle');
 var db = new(cradle.Connection)({cache: false}).database('meals');
 
+var ejs = require('elastic.js');
+var NodeClient = require('elastic.js/elastic-node-client').NodeClient;
+
+ejs.client = NodeClient('localhost', '9200');
+
 exports.all = function (callback) {
   db.view('meals/by_entree_name', {
     include_docs: true
@@ -15,6 +20,29 @@ exports.all = function (callback) {
       callback(err, _.pluck(results, 'doc'));
     }
   });
+};
+
+exports.search = function (query, callback) {
+  var query = ejs.MatchQuery("_all", query);
+  var request = ejs.Request().indices("meals").types("meal").query(query);
+
+  try {
+    request.doSearch(function(results) {
+      if (results.hits) {
+        callback(null, _.pluck(results.hits.hits, '_source'));
+      } else {
+        callback({
+          error: "not_found",
+          message: "Search results could not be found."
+        }, null);
+      }
+    });
+  } catch (e) {
+    callback({
+      error: "internal_server_error",
+      message: "The search backend had a problem."
+    }, null);
+  }
 };
 
 exports.get = function (id, callback) {

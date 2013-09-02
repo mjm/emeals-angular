@@ -1,7 +1,8 @@
 var errorMap = {
   "bad_request": 400,
   "not_found": 404,
-  "conflict": 409
+  "conflict": 409,
+  "internal_server_error": 500
 };
 
 exports.handle = function(res, err, result) {

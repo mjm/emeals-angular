@@ -1,12 +1,15 @@
 angular.module('emeals.controllers').controller 'MealsListCtrl', ($scope, $routeParams, Meals, Navigation) ->
-  loadMeals = ->
-    $scope.meals = Meals.all()
-    $scope.meals.then (meals) ->
-      $scope.meals = meals
-
-  loadMeals()
   $scope.$routeParams = $routeParams
   $scope.nav = Navigation
+  $scope.search = {query: ''}
+
+  loadMeals = ->
+    $scope.meals = Meals.search($scope.search.query)
+    $scope.meals.then (meals) ->
+      $scope.meals = meals
+  loadMeals()
+
+  $scope.$watch 'search.query', loadMeals
 
   $scope.$on "mealupdated", (e, meal) ->
     existingMeal = _.find $scope.meals, _id: meal._id
