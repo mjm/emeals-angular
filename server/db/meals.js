@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var exec = require('child_process').exec;
+var path = require('path');
 
 var cradle = require('cradle');
 var db = new(cradle.Connection)({cache: false}).database('meals');
@@ -22,8 +23,16 @@ exports.delete = function (id, rev, callback) {
   db.remove(id, rev, callback);
 };
 
+function parserJarPath() {
+  return path.join(__dirname, '..', '..', 'external', 'parser.jar');
+}
+
+function importCommandForMenu(menu) {
+  return 'java -jar ' + parserJarPath() + ' ' + menu;
+}
+
 exports.import = function (menu, callback) {
-  exec('menu_to_json ' + menu, function(err, stdout, stderr) {
+  exec(importCommandForMenu(menu), function(err, stdout, stderr) {
     if (err) {
       callback(err, stderr);
     } else {
