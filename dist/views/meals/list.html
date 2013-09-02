@@ -1,5 +1,5 @@
 <p>
-  <input type="search" class="form-control" placeholder="Search meals...">
+  <input type="search" class="form-control" placeholder="Search meals..." ng-model="search.query">
 </p>
 <p>
   <form action="/api/meals/import" method="POST" enctype="multipart/form-data" file-upload="options" ng-controller="UploadCtrl">
