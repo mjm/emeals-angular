@@ -20,7 +20,7 @@ angular.module('emeals.directives').directive 'scrollToActive', ($timeout) ->
     else
       # element is below viewport, so we want to scroll so it is just visible
       # from the bottom
-      elemTop += windowTop - container.height() + 20;
+      elemTop += windowTop - container.height() + elem.height() - 20;
 
     container.animate
       scrollTop: elemTop
