@@ -7,7 +7,18 @@
   </button>
 </div>
 
+<h4>
+  <span ng-repeat="flag in meal.flags" class="label label-primary">{{flag}} </span>
+</h4>
 <h2>{{meal.entree.name}} <small>{{meal.side.name}}</small></h2>
+
+<div ng-show="meal.times">
+  <ul class="list-inline">
+    <li><strong>Prep</strong> {{meal.times.prep}}</li>
+    <li><strong>Cook</strong> {{meal.times.cook}}</li>
+    <li><strong>Total</strong> {{meal.times.total}}</li>
+  </ul>
+</div>
 
 <div class="row">
   <div class="col-md-6" ng-controller="DishShowCtrl" ng-init="type='entree'">
