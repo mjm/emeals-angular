@@ -9,7 +9,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <label for="plan_name">Plan Name</label>
-        <input type="text" class="form-control" id="plan_name" ng-model="plan.name" autofocus>
+        <input type="text" class="form-control" id="plan_name" ng-model="plan.name" autofocus key-save="save()">
       </div>
     </div>
   </div>
@@ -17,13 +17,13 @@
     <div class="col-md-6">
       <div class="form-group">
         <label for="plan_start">Start Day</label>
-        <input type="date" class="form-control" id="plan_start" ng-model="plan.days.start">
+        <input type="date" class="form-control" id="plan_start" ng-model="plan.days.start" key-save="save()">
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label for="plan_end">End Day</label>
-        <input type="date" class="form-control" id="plan_end" ng-model="plan.days.end">
+        <input type="date" class="form-control" id="plan_end" ng-model="plan.days.end" key-save="save()">
       </div>
     </div>
   </div>

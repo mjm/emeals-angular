@@ -9,21 +9,21 @@
   <div class="panel-body">
     <div class="form-group">
       <label for="{{type}}_name">Name</label>
-      <input type="text" required class="form-control" id="{{type}}_name" ng-model="dish.name">
+      <input type="text" required class="form-control" id="{{type}}_name" ng-model="dish.name" key-save="save()">
     </div>
     <label>Ingredients</label>
     <div class="row" ng-repeat="ing in dish.ingredients">
       <div class="col-sm-2">
-        <input type="text" class="form-control" ng-model="ing.amount">
+        <input type="text" class="form-control" ng-model="ing.amount" key-save="save()">
       </div>
       <div class="col-sm-2">
-        <select ng-model="ing.unit" class="form-control">
+        <select ng-model="ing.unit" class="form-control" key-save="save()">
           <option></option>
           <option ng-repeat="unit in unitChoices">{{unit}}</option>
         </select>
       </div>
       <div class="col-sm-7">
-        <input type="text" class="form-control" ng-model="ing.description">
+        <input type="text" class="form-control" ng-model="ing.description" key-save="save()">
       </div>
       <div class="col-sm-1">
         <button class="btn btn-danger btn-sm" ng-click="remove($index)">
@@ -37,7 +37,7 @@
     </button>
     <div class="form-group">
       <label for="{{type}}_instructions">Instructions</label>
-      <textarea class="form-control" id="{{type}}_instructions" ng-model="dish.instructions" rows="10"></textarea>
+      <textarea class="form-control" id="{{type}}_instructions" ng-model="dish.instructions" rows="10" key-save="save()"></textarea>
     </div>
   </div>
 </div>
