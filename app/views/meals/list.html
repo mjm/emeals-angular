@@ -9,7 +9,15 @@
 </p>
 <p>
   <form action="/api/meals/import" method="POST" enctype="multipart/form-data" file-upload="options" ng-controller="UploadCtrl">
-    <span class="btn btn-success btn-block fileinput-button">
+    <div ng-show="isUploading">
+      <div class="progress progress-striped active">
+        <div class="progress-bar" style="width: 100%">
+          <div class="sr-only">Importing...</div>
+        </div>
+      </div>
+    </div>
+    <span class="btn btn-success btn-block fileinput-button" ng-hide="isUploading">
+      <i class="icon-upload-alt"></i>
       Import Meals
       <input type="file" name="menu">
     </span>
