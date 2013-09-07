@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var exec = require('child_process').exec;
 var path = require('path');
+var util = require('util');
 
 var cradle = require('cradle');
 var db = new(cradle.Connection)({cache: false}).database('meals');
@@ -66,23 +67,33 @@ function importCommandForMenu(menu) {
 }
 
 exports.import = function (menu, callback) {
-  exec(importCommandForMenu(menu), function(err, stdout, stderr) {
+  var command = importCommandForMenu(menu);
+  util.log("Running import command: " + command);
+  exec(command, function(err, stdout, stderr) {
     if (err) {
-      callback(err, stderr);
+      // I'm deeply disappointed in you...
+      util.error("Command errored. This should not have happened.", err);
+      callback({
+        error: "internal_server_error",
+        message: "The meal importer had a problem. The error has been logged."
+      }, stderr);
     } else {
       var meals = JSON.parse(stdout);
       var results = [];
       function process(meal) {
         if (meal) {
+          util.debug("Processing meal " + (results.length + 1) + "...");
           db.save(meal, function (err, res) {
             results.push(res);
-            process(meals.shift());
+            process(meals.successes.shift());
           });
         } else {
+          util.debug("Processed all meals.");
           callback(null, results);
         }
       }
-      process(meals.shift());
+      process(meals.successes.shift());
+      // TODO handle the failures
     }
   });
 };
