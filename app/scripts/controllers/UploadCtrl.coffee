@@ -5,7 +5,7 @@ angular.module('emeals.controllers').controller 'UploadCtrl', ($scope) ->
 
   $scope.isUploading = false
 
-  $scope.$on 'fileuploaddone', ->
+  $scope.$on 'fileuploadalways', ->
     $scope.isUploading = false
 
   $scope.$on 'fileuploadstart', ->
