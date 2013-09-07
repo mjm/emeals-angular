@@ -66,36 +66,44 @@ function importCommandForMenu(menu) {
   return 'java -jar ' + parserJarPath() + ' ' + menu;
 }
 
+function handleImportFailure(err, callback) {
+  util.error("Command errored. This should not have happened.", err);
+  callback({
+    error: "internal_server_error",
+    message: "The meal importer had a problem. The error has been logged."
+  }, "");
+}
+
+function handleImportSuccess(meals, callback) {
+  var results = [];
+  function process(meal) {
+    if (meal) {
+      util.debug("Processing meal " + (results.length + 1) + "...");
+      db.save(meal, function (err, res) {
+        results.push(res);
+        process(meals.successes.shift());
+      });
+    } else {
+      util.debug("Processed all meals.");
+      callback(null, {
+        successes: results,
+        failures: meals.failures
+      });
+    }
+  }
+  process(meals.successes.shift());
+}
+
 exports.import = function (menu, callback) {
   var command = importCommandForMenu(menu);
+
   util.log("Running import command: " + command);
-  exec(command, function(err, stdout, stderr) {
+  exec(command, function(err, out) {
     if (err) {
       // I'm deeply disappointed in you...
-      util.error("Command errored. This should not have happened.", err);
-      callback({
-        error: "internal_server_error",
-        message: "The meal importer had a problem. The error has been logged."
-      }, stderr);
+      handleImportFailure(err, callback);
     } else {
-      var meals = JSON.parse(stdout);
-      var results = [];
-      function process(meal) {
-        if (meal) {
-          util.debug("Processing meal " + (results.length + 1) + "...");
-          db.save(meal, function (err, res) {
-            results.push(res);
-            process(meals.successes.shift());
-          });
-        } else {
-          util.debug("Processed all meals.");
-          callback(null, {
-            successes: results,
-            failures: meals.failures
-          });
-        }
-      }
-      process(meals.successes.shift());
+      handleImportSuccess(JSON.parse(out), callback);
     }
   });
 };
