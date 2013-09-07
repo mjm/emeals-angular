@@ -31,6 +31,20 @@ function importDesignIntoDb(doc, db) {
   });
 }
 
+exports.destroyDatabases = function() {
+  [['meals', mealDb], ['plans', planDb]].forEach(function (db) {
+    db[1].destroy(function (err, res) {
+      if (err) {
+        console.error("An error occurred trying to destroy the " + db[0] + " database.");
+        console.error(err);
+      } else {
+        console.log("Successfully destroyed the " + db[0] + " database.");
+      }
+    });
+    db[1].create();
+  });
+};
+
 exports.importPlansDesign = function() {
   importDesignIntoDb(plansDesign, planDb);
 };
@@ -42,4 +56,9 @@ exports.importMealsDesign = function() {
 exports.importAll = function() {
   exports.importMealsDesign();
   exports.importPlansDesign();
-}
+};
+
+exports.destroyAndImportAll = function() {
+  exports.destroyDatabases();
+  exports.importAll();
+};
