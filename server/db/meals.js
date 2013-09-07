@@ -89,11 +89,13 @@ exports.import = function (menu, callback) {
           });
         } else {
           util.debug("Processed all meals.");
-          callback(null, results);
+          callback(null, {
+            successes: results,
+            failures: meals.failures
+          });
         }
       }
       process(meals.successes.shift());
-      // TODO handle the failures
     }
   });
 };
