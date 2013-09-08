@@ -11,21 +11,20 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 
-require('./server/routes')(app);
+require('./routes')(app);
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.static(path.join(__dirname, 'app')));
-  app.use(express.static(path.join(__dirname, '.tmp')));
+  app.use(express.static(path.join(__dirname, '../_public')));
   app.use(function(req, res, next) {
-    res.sendfile(path.join(__dirname, 'app/index.html'));
+    res.sendfile(path.join(__dirname, '../_public/index.html'));
   });
   app.use(express.errorHandler());
 }
 
-// production should have nginx serve static assets
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
-
+exports.startServer = function(port, path, callback) {
+  http.createServer(app).listen(port, function(){
+    console.log('Express server listening on port ' + port);
+    callback();
+  });
+};

@@ -49,7 +49,11 @@
     "grunt-google-cdn": "~0.2.0",
     "grunt-ngmin": "~0.0.2",
     "express": "3.3.5",
-    "grunt-express-server": "~0.4.2"
+    "grunt-express-server": "~0.4.2",
+    "javascript-brunch": "~1.6.0",
+    "coffee-script-brunch": "~1.7.2",
+    "css-brunch": "~1.6.0",
+    "sass-brunch": "~1.7.0"
   },
   "engines": {
     "node": ">=0.8.0"

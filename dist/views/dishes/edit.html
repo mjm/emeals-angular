@@ -9,7 +9,7 @@
   <div class="panel-body">
     <div class="form-group">
       <label for="{{type}}_name">Name</label>
-      <input type="text" required="" class="form-control" id="{{type}}_name" ng-model="dish.name" key-save="save()">
+      <input type="text" required class="form-control" id="{{type}}_name" ng-model="dish.name" key-save="save()">
     </div>
     <label>Ingredients</label>
     <div class="row" ng-repeat="ing in dish.ingredients">
@@ -41,3 +41,4 @@
     </div>
   </div>
 </div>
+

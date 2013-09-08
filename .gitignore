@@ -1,7 +1,7 @@
 node_modules
-# dist
+_public
 .tmp
 .sass-cache
-app/bower_components
+bower_components
 .DS_Store
 libpeerconnection.log

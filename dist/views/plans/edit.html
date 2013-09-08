@@ -9,7 +9,7 @@
     <div class="col-md-12">
       <div class="form-group">
         <label for="plan_name">Plan Name</label>
-        <input type="text" class="form-control" id="plan_name" ng-model="plan.name" autofocus="" key-save="save()">
+        <input type="text" class="form-control" id="plan_name" ng-model="plan.name" autofocus key-save="save()">
       </div>
     </div>
   </div>
@@ -39,7 +39,9 @@
   <p>Meals in <span class="hidden_meal">red</span> fall outside the current day range for
   the plan and won't be shown.</p>
   <dl class="dl-horizontal" ng-controller="ScheduledMealsCtrl">
-    <span ng-repeat="day in mealsByDay" ng-hide="day.meals.length == 0" ng-class="{hidden_meal: isDayHidden(day.day)}">
+    <span ng-repeat="day in mealsByDay"
+          ng-hide="day.meals.length == 0"
+          ng-class="{hidden_meal: isDayHidden(day.day)}">
       <dt>{{day.day}}</dt>
       <dd>
         <ul>
