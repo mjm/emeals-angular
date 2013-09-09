@@ -7,7 +7,7 @@ exports.config =
   paths:
     public: '_public'
   server:
-    path: 'server/index.js'
+    path: 'server/index.coffee'
   files:
     javascripts:
       joinTo:
