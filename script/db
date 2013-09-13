@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case "$1" in
+  redesign)
+    coffee -e "require('./server/db/design').importAll()"
+    ;;
+  reset)
+    coffee -e "require('./server/db/design').destroyAndImportAll()"
+    ;;
+  *)
+    echo $"Usage: script/db {redesign|reset}"
+    exit 1
+esac

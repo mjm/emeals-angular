@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$1" in
+  prod)
+    coffee app.coffee
+    ;;
+  *)
+    brunch watch --server
+    ;;
+esac
