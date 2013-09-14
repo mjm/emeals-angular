@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive" ng-show="plans.length > 0">
   <table class="table table-striped">
     <thead>
       <th>Days</th>
@@ -14,3 +14,7 @@
     </tbody>
   </table>
 </div>
+
+<p ng-show="plans.length == 0">
+  You don't have any.
+</p>

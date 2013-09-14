@@ -13,8 +13,24 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <link rel="stylesheet" type="text/css" href="/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/css/vendor.css">
   </head>
   <body ng-app="emeals">
+    <div class="errors">
+      <div
+        class="alert alert-dismissable"
+        ng-repeat="error in errors"
+        ng-class="{'alert-danger': error.type == 'error',
+                   'alert-warning': error.type == 'warning',
+                   'alert-success': error.type == 'success'}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong ng-show="error.type == 'error'">Oh no!</strong>
+        <strong ng-show="error.type == 'warning'">Warning!</strong>
+        <strong ng-show="error.type == 'success'">Success!</strong>
+        {{error.message}}
+      </div>
+    </div>
+
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" ng-controller="NavigationCtrl">
       <div class="navbar-header">
         <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".main-nav-collapse">
@@ -22,17 +38,19 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand">Eats</a>
+        <a href="/" class="navbar-brand">Eats</a>
       </div>
 
       <div class="collapse navbar-collapse main-nav-collapse">
         <ul class="nav navbar-nav">
           <li class="dropdown" ng-class="{active: nav.isViewingPlans()}">
-            <a href="/plans/current">Menu Planning</a><!--
+            <a href="/plans">Menu Planning</a><!--
             --><a class="dropdown-toggle" data-toggle="dropdown">
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
+              <li><a href="/plans/current">Current Plan</a></li>
+              <li class="divider"></li>
               <li><a href="/plans/new">New Plan</a></li>
             </ul>
           </li>

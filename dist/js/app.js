@@ -38,6 +38,11 @@ emeals.config(function($routeProvider) {
         'Plans', function(Plans) {
           return Plans.future();
         }
+      ],
+      current: [
+        'Plans', function(Plans) {
+          return Plans.load('current');
+        }
       ]
     }
   }).when('/plans/new', {
@@ -134,7 +139,7 @@ _.mixin(_.string.exports());
   });
 });
 
-;angular.module('emeals.controllers').controller('MealEditCtrl', function($scope, $rootScope, $location, meal) {
+;angular.module('emeals.controllers').controller('MealEditCtrl', function($scope, $rootScope, $location, meal, Errors) {
   $scope.meal = meal;
   $scope.cancel = function() {
     return $location.path("/meals/" + meal._id);
@@ -143,7 +148,7 @@ _.mixin(_.string.exports());
     return meal.put().then(function() {
       $rootScope.$broadcast("mealupdated", meal);
       return $location.path("/meals/" + meal._id);
-    });
+    }, Errors.defaultHandler);
   };
 });
 
@@ -161,7 +166,7 @@ _.mixin(_.string.exports());
   };
 });
 
-;angular.module('emeals.controllers').controller('MealsListCtrl', function($scope, $routeParams, Meals, Navigation) {
+;angular.module('emeals.controllers').controller('MealsListCtrl', function($scope, $routeParams, Meals, Navigation, Errors) {
   var loadMeals;
   $scope.$routeParams = $routeParams;
   $scope.nav = Navigation;
@@ -190,28 +195,42 @@ _.mixin(_.string.exports());
     });
     return $scope.meals.splice(index, 1);
   });
-  return $scope.$on("fileuploaddone", loadMeals);
+  $scope.$on("fileuploaddone", function(e, data) {
+    var failureCount, successCount;
+    failureCount = data.result.failures.length;
+    successCount = data.result.successes.length;
+    if (failureCount > 0) {
+      Errors.setWarning("" + successCount + " meals imported. " + failureCount + " failed to import.");
+    } else {
+      Errors.setSuccess("" + successCount + " meals imported.");
+    }
+    return loadMeals();
+  });
+  return $scope.$on("fileuploadfail", function(e, data) {
+    return Errors.setError("An error occurred while importing. The error was logged.");
+  });
 });
 
-;angular.module('emeals.controllers').controller('PlanEditCtrl', function($scope, plan, $location) {
+;angular.module('emeals.controllers').controller('PlanEditCtrl', function($scope, plan, $location, Errors) {
   $scope.plan = plan;
   $scope.isNew = false;
   $scope.cancel = function() {
     return $location.path("/plans/" + plan._id);
   };
   return $scope.save = function() {
-    return $scope.plan.put().then(function() {
+    return $scope.plan.put().then((function() {
       return $scope.cancel();
-    });
+    }), Errors.defaultHandler);
   };
 });
 
-;angular.module('emeals.controllers').controller('PlanListCtrl', function($scope, pastPlans, futurePlans) {
+;angular.module('emeals.controllers').controller('PlanListCtrl', function($scope, pastPlans, futurePlans, current) {
   $scope.pastPlans = pastPlans;
-  return $scope.futurePlans = futurePlans;
+  $scope.futurePlans = futurePlans;
+  return $scope.current = current;
 });
 
-;angular.module('emeals.controllers').controller('PlanNewCtrl', function($scope, Dates, $location, Plans) {
+;angular.module('emeals.controllers').controller('PlanNewCtrl', function($scope, Dates, $location, Plans, Errors) {
   $scope.plan = {
     name: "",
     days: {
@@ -227,7 +246,7 @@ _.mixin(_.string.exports());
   return $scope.save = function() {
     return Plans.create($scope.plan).then(function(result) {
       return $location.path("/plans/" + result.id);
-    });
+    }, Errors.defaultHandler);
   };
 });
 
@@ -511,6 +530,33 @@ angular.module('emeals.directives').directive('droppable', function() {
   };
 });
 
+;angular.module('emeals.services').factory('Errors', function($rootScope) {
+  var Errors;
+  return Errors = {
+    setError: function(message) {
+      return Errors.setMessage('error', message);
+    },
+    setWarning: function(message) {
+      return Errors.setMessage('warning', message);
+    },
+    setSuccess: function(message) {
+      return Errors.setMessage('success', message);
+    },
+    setMessage: function(type, message) {
+      return $rootScope.errors = [
+        {
+          type: type,
+          message: message
+        }
+      ];
+    },
+    defaultHandler: function(result) {
+      var _ref;
+      return Errors.setError((result != null ? (_ref = result.data) != null ? _ref.reason : void 0 : void 0) || "An error occurred.");
+    }
+  };
+});
+
 ;angular.module('emeals.services').factory('Meals', function(Restangular, $route) {
   var Meals;
   return Meals = {
@@ -546,8 +592,11 @@ angular.module('emeals.directives').directive('droppable', function() {
 ;angular.module('emeals.services').factory('Plans', function(Dates, Restangular, $route) {
   var Plans;
   return Plans = {
-    load: function() {
-      return Restangular.one('plans', $route.current.params.id).get();
+    load: function(id) {
+      if (id == null) {
+        id = $route.current.params.id;
+      }
+      return Restangular.one('plans', id).get();
     },
     create: function(plan) {
       return Restangular.all('plans').post(plan);
