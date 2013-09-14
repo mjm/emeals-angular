@@ -6,6 +6,7 @@ case "$1" in
     ;;
   reset)
     coffee -e "require('./server/db/design').destroyAndImportAll()"
+    script/setup_search
     ;;
   *)
     echo $"Usage: script/db {redesign|reset}"

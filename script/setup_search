@@ -1,10 +1,12 @@
 #!/bin/sh
 
+curl -XDELETE http://localhost:9200/meals ; echo
 curl -XPUT http://localhost:9200/meals -d '
   "settings": {
   }
-'
+' ; echo
 
+curl -XDELETE http://localhost:9200/_river/meals ; echo
 curl -XPUT http://localhost:9200/_river/meals/_meta -d '
 {
   "type": "couchdb",
@@ -18,4 +20,4 @@ curl -XPUT http://localhost:9200/_river/meals/_meta -d '
     "index": "meals",
     "type": "meal"
   }
-}'
+}' ; echo
