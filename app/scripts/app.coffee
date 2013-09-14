@@ -27,6 +27,7 @@ emeals.config ($routeProvider) ->
     resolve:
       pastPlans:   ['Plans', (Plans) -> Plans.past()]
       futurePlans: ['Plans', (Plans) -> Plans.future()]
+      current:     ['Plans', (Plans) -> Plans.load('current')]
 
   .when '/plans/new',
     templateUrl: 'views/plans/edit.html'

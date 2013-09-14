@@ -1,7 +1,7 @@
 angular.module('emeals.services').factory 'Plans', (Dates, Restangular, $route) ->
   Plans =
-    load: ->
-      Restangular.one('plans', $route.current.params.id).get()
+    load: (id = $route.current.params.id) ->
+      Restangular.one('plans', id).get()
 
     create: (plan) ->
       Restangular.all('plans').post(plan)
