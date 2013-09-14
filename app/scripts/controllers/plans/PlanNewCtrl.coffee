@@ -1,4 +1,4 @@
-angular.module('emeals.controllers').controller 'PlanNewCtrl', ($scope, Dates, $location, Plans) ->
+angular.module('emeals.controllers').controller 'PlanNewCtrl', ($scope, Dates, $location, Plans, Errors) ->
   $scope.plan =
     name: ""
     days:
@@ -7,9 +7,9 @@ angular.module('emeals.controllers').controller 'PlanNewCtrl', ($scope, Dates, $
     meals: {}
   $scope.isNew = true
 
-  $scope.cancel = ->
-    $location.path '/plans/current'
+  $scope.cancel = -> $location.path '/plans/current'
 
   $scope.save = ->
     Plans.create($scope.plan).then (result) ->
       $location.path "/plans/#{result.id}"
+    , Errors.defaultHandler

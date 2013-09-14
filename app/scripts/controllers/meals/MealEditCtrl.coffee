@@ -1,4 +1,4 @@
-angular.module('emeals.controllers').controller 'MealEditCtrl', ($scope, $rootScope, $location, meal) ->
+angular.module('emeals.controllers').controller 'MealEditCtrl', ($scope, $rootScope, $location, meal, Errors) ->
   $scope.meal = meal
 
   $scope.cancel = ->
@@ -8,3 +8,4 @@ angular.module('emeals.controllers').controller 'MealEditCtrl', ($scope, $rootSc
     meal.put().then ->
       $rootScope.$broadcast "mealupdated", meal
       $location.path "/meals/#{meal._id}"
+    , Errors.defaultHandler

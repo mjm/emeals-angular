@@ -8,9 +8,9 @@ html, body {
 }
 
 body {
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
+  background: #fafafa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
 }
 
 .buttons {
@@ -92,5 +92,22 @@ button.remove-meal {
   & .overlay-text{
     display: table-cell;
     vertical-align: middle;
+  }
+}
+
+.errors {
+  position: fixed;
+  right: 5px;
+  top: 5px;
+
+  z-index: 1100;
+
+  .alert {
+    position: relative;
+    padding: 9px;
+
+    &.alert-dismissable {
+      padding-right: 35px;
+    }
   }
 }

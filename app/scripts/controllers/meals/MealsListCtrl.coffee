@@ -1,4 +1,4 @@
-angular.module('emeals.controllers').controller 'MealsListCtrl', ($scope, $routeParams, Meals, Navigation) ->
+angular.module('emeals.controllers').controller 'MealsListCtrl', ($scope, $routeParams, Meals, Navigation, Errors) ->
   $scope.$routeParams = $routeParams
   $scope.nav = Navigation
   $scope.search = {query: ''}
@@ -19,4 +19,16 @@ angular.module('emeals.controllers').controller 'MealsListCtrl', ($scope, $route
     index = _.findIndex $scope.meals, _id: meal._id
     $scope.meals.splice index, 1
 
-  $scope.$on "fileuploaddone", loadMeals
+  $scope.$on "fileuploaddone", (e, data) ->
+    failureCount = data.result.failures.length
+    successCount = data.result.successes.length
+
+    if failureCount > 0
+      Errors.setWarning "#{successCount} meals imported. #{failureCount} failed to import."
+    else
+      Errors.setSuccess "#{successCount} meals imported."
+
+    loadMeals()
+
+  $scope.$on "fileuploadfail", (e, data) ->
+    Errors.setError "An error occurred while importing. The error was logged."
