@@ -1,0 +1,16 @@
+<div class="btn-group pull-right">
+  <a ng-href="/plans/{{plan._id}}" class="btn btn-primary">
+    <span class="glyphicon glyphicon-cutlery"></span> Meals
+  </a>
+</div>
+
+<h2>{{plan.name}} <small>Shopping List</small></h2>
+
+<div ng-repeat="(category, ingredients) in shoppingList">
+  <h4>{{displayName(category)}}</h4>
+  <ul>
+    <li ng-repeat="ingredient in ingredients">
+      {{ingredient | ingredient}}
+    </li>
+  </ul>
+</div>

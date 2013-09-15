@@ -58,6 +58,21 @@ emeals.config(function($routeProvider) {
         }
       ]
     }
+  }).when('/plans/:id/shopping_list', {
+    templateUrl: 'views/plans/shopping_list.html',
+    controller: 'ShoppingListCtrl',
+    resolve: {
+      plan: [
+        'Plans', function(Plans) {
+          return Plans.load();
+        }
+      ],
+      shoppingList: [
+        'Plans', function(Plans) {
+          return Plans.shoppingList();
+        }
+      ]
+    }
   }).when('/plans/:id/edit', {
     templateUrl: 'views/plans/edit.html',
     controller: 'PlanEditCtrl',
@@ -298,6 +313,25 @@ angular.module('emeals.controllers').controller('PlanShowCtrl', function($scope,
   };
 });
 
+;var categories;
+
+categories = {
+  meat: "Meat and Seafood",
+  "null": "Miscellaneous",
+  packaged: "Canned and Packaged",
+  produce: "Produce",
+  refrigerated: "Refrigerated",
+  staple: "Staples"
+};
+
+angular.module('emeals.controllers').controller('ShoppingListCtrl', function($scope, plan, shoppingList) {
+  $scope.plan = plan;
+  $scope.shoppingList = shoppingList.categories;
+  return $scope.displayName = function(category) {
+    return categories[category];
+  };
+});
+
 ;angular.module('emeals.directives').directive('draggable', function($location, Navigation) {
   return {
     restrict: 'A',
@@ -489,6 +523,12 @@ angular.module('emeals.directives').directive('droppable', function() {
   };
 });
 
+;angular.module('emeals.filters').filter('ingredient', function() {
+  return function(ingredient) {
+    return "" + (ingredient.amount || '') + " " + (ingredient.unit || '') + " " + ingredient.description;
+  };
+});
+
 ;angular.module('emeals.filters').filter('utcdate', function($filter) {
   return function(input, format) {
     var localDate, localOffset, localTime;
@@ -597,6 +637,12 @@ angular.module('emeals.directives').directive('droppable', function() {
         id = $route.current.params.id;
       }
       return Restangular.one('plans', id).get();
+    },
+    shoppingList: function(id) {
+      if (id == null) {
+        id = $route.current.params.id;
+      }
+      return Restangular.one('plans', id).customGET('shopping_list');
     },
     create: function(plan) {
       return Restangular.all('plans').post(plan);
