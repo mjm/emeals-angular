@@ -25,4 +25,4 @@ exports.destroy = (req, res) ->
 
 exports.shoppingList = (req, res) ->
   db.get req.params.id, (err, plan) ->
-    errors.handle res, err, ing.fromPlan(plan)
+    errors.handle res, err, {categories: ing.fromPlan(plan)}

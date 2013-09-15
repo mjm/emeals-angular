@@ -3,6 +3,8 @@ _.mixin(require 'underscore.inflections')
 _s = require 'underscore.string'
 Ratio = require 'lb-ratio'
 
+category = require './category'
+
 mealsFromPlan = (plan) ->
   _.flatten _.values(plan.meals)
 
@@ -46,9 +48,10 @@ merge = (ingredients, desc) ->
 
   _.extend ingredient,
     amount: ingredient.amount.simplify().toLocaleString()
+    category: category.detect(ingredient)
 
 mergeAll = (normalized) ->
-  _.map normalized, merge
+  _.groupBy sort(_.map normalized, merge), 'category'
 
 exports.fromPlan = (plan) ->
-  sort mergeAll(normalizeAll(combine(mealsFromPlan plan)))
+  mergeAll normalizeAll combine(mealsFromPlan plan)

@@ -6,8 +6,11 @@
 
 <h2>{{plan.name}} <small>Shopping List</small></h2>
 
-<ul>
-  <li ng-repeat="ingredient in shoppingList">
-    {{ingredient | ingredient}}
-  </li>
-</ul>
+<div ng-repeat="(category, ingredients) in shoppingList">
+  <h4>{{displayName(category)}}</h4>
+  <ul>
+    <li ng-repeat="ingredient in ingredients">
+      {{ingredient | ingredient}}
+    </li>
+  </ul>
+</div>
