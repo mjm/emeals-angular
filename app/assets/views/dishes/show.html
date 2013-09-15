@@ -1,7 +1,7 @@
 <h4>{{type | capitalize}} Ingredients</h4>
 <ul>
   <li ng-repeat="ingredient in dish.ingredients">
-    {{ingredient.amount}} {{ingredient.unit}} {{ingredient.description}}
+  {{ingredient | ingredient}}
   </li>
 </ul>
 

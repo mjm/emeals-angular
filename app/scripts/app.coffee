@@ -39,6 +39,13 @@ emeals.config ($routeProvider) ->
     resolve:
       plan: ['Plans', (Plans) -> Plans.load()]
 
+  .when '/plans/:id/shopping_list',
+    templateUrl: 'views/plans/shopping_list.html'
+    controller: 'ShoppingListCtrl'
+    resolve:
+      plan: ['Plans', (Plans) -> Plans.load()]
+      shoppingList: ['Plans', (Plans) -> Plans.shoppingList()]
+
   .when '/plans/:id/edit',
     templateUrl: 'views/plans/edit.html'
     controller: 'PlanEditCtrl'

@@ -16,3 +16,4 @@ module.exports = (app) ->
   app.get    '/api/plans/:id',     plans.show
   app.put    '/api/plans/:id',     plans.update
   app.delete '/api/plans/:id',     plans.destroy
+  app.get    '/api/plans/:id/shopping_list', plans.shoppingList

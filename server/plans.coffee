@@ -1,5 +1,6 @@
 db = require './db/plans'
 errors = require './errors'
+ing = require './ingredients'
 
 exports.current = (req, res) ->
   db.getCurrent errors.handler(res)
@@ -21,3 +22,7 @@ exports.update = (req, res) ->
 
 exports.destroy = (req, res) ->
   db.delete req.params.id, req.query._rev, errors.handler(res)
+
+exports.shoppingList = (req, res) ->
+  db.get req.params.id, (err, plan) ->
+    errors.handle res, err, ing.fromPlan(plan)

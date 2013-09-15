@@ -3,6 +3,9 @@ angular.module('emeals.services').factory 'Plans', (Dates, Restangular, $route) 
     load: (id = $route.current.params.id) ->
       Restangular.one('plans', id).get()
 
+    shoppingList: (id = $route.current.params.id) ->
+      Restangular.one('plans', id).customGET('shopping_list')
+
     create: (plan) ->
       Restangular.all('plans').post(plan)
 
