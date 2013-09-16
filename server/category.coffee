@@ -7,6 +7,8 @@ categoryMap =
   shrimp: "meat"
   bacon: "meat"
   cod: "meat"
+  steak: "meat"
+  scallop: "meat"
   walnut: "packaged"
   paste: "packaged"
   peach: "produce"
@@ -20,6 +22,7 @@ categoryMap =
   broccolini: "produce"
   carrot: "produce"
   radish: "produce"
+  kale: "produce"
   egg: "refrigerated"
   cheese: "refrigerated"
   flour: "staple"
@@ -36,6 +39,8 @@ categoryMap =
   syrup: "staple"
   mayonnaise: "staple"
   paprika: "staple"
+  powder: "staple"
+  wine: "staple"
   pepper: (desc) ->
     if desc is "pepper" or /(black|red|ground|cayenne)/.test(desc)
       "staple"
