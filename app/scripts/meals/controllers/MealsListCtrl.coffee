@@ -20,7 +20,6 @@ angular.module('emeals.meals').controller 'MealsListCtrl', ($scope, $routeParams
     $scope.meals.splice index, 1
 
   $scope.$on "fileuploaddone", (e, data) ->
-    console.log arguments
     failureCount = data.result.failures.length
     successCount = data.result.successes.length
 
@@ -31,5 +30,5 @@ angular.module('emeals.meals').controller 'MealsListCtrl', ($scope, $routeParams
 
     loadMeals()
 
-  $scope.$on "fileuploadfail", (e, data) ->
+  $scope.$on "fileuploadfail", ->
     Errors.setError "An error occurred while importing. The error was logged."

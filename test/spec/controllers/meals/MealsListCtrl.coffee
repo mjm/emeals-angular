@@ -58,3 +58,42 @@ describe "Controller: MealsListCtrl", ->
 
     it "reloads the meals list", ->
       expect(@meals.search).toHaveBeenCalled()
+
+    describe "when no meals failed", ->
+      beforeEach ->
+        @scope.$apply =>
+          @scope.$broadcast "fileuploaddone",
+            result:
+              failures: []
+              successes: [{}, {}, {}]
+
+      it "shows a success message", ->
+        expect(@scope.errors).toEqual [
+          type: "success"
+          message: "3 meals imported."
+        ]
+
+    describe "when some meals failed", ->
+      beforeEach ->
+        @scope.$apply =>
+          @scope.$broadcast "fileuploaddone",
+            result:
+              failures: [{}]
+              successes: [{}, {}]
+
+      it "shows a warning message", ->
+        expect(@scope.errors).toEqual [
+          type: "warning"
+          message: "2 meals imported. 1 failed to import."
+        ]
+
+  describe "when a fileuploadfail event is fired", ->
+    beforeEach ->
+      @scope.$apply =>
+        @scope.$broadcast "fileuploadfail"
+
+    it "shows an error message", ->
+      expect(@scope.errors).toEqual [
+        type: "error"
+        message: "An error occurred while importing. The error was logged."
+      ]
