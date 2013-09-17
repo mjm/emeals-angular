@@ -1,9 +1,7 @@
 emeals = angular.module 'emeals',
   ['blueimp.fileupload',
-   'emeals.services',
-   'emeals.directives',
-   'emeals.filters',
-   'emeals.controllers']
+   'emeals.meals',
+   'emeals.plans']
 
 emeals.config ($routeProvider) ->
   $routeProvider.when '/',

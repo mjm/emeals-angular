@@ -18,11 +18,10 @@ exports.config =
           'bower_components/lodash/lodash.js'
           'bower_components/jquery/jquery.js'
           'bower_components/angular/angular.js'
+          'app/scripts/common.coffee'
+          'app/scripts/meals.coffee'
+          'app/scripts/plans.coffee'
           'app/scripts/app.coffee'
-          'app/scripts/services/services.coffee'
-          'app/scripts/filters/filters.coffee'
-          'app/scripts/directives/directives.coffee'
-          'app/scripts/controllers/controllers.coffee'
         ]
     stylesheets:
       joinTo:
