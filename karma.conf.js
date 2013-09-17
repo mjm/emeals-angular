@@ -9,19 +9,15 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'app/bower_components/angular/angular.js',
-      'app/bower_components/lodash/lodash.js',
-      'app/bower_components/underscore.string/lib/underscore.string.js',
-      'app/bower_components/restangular/dist/restangular.js',
-      'app/bower_components/angular-mocks/angular-mocks.js',
-      'app/bower_components/jquery-file-upload/js/jquery.fileupload-angular.js',
-      '.tmp/scripts/services/services.js',
-      '.tmp/scripts/directives/directives.js',
-      '.tmp/scripts/filters/filters.js',
-      '.tmp/scripts/controllers/controllers.js',
-      '.tmp/scripts/app.js',
-      '.tmp/scripts/**/*.js',
-      '.tmp/spec/**/*.js'
+      'bower_components/angular/angular.js',
+      'bower_components/lodash/lodash.js',
+      'bower_components/underscore.string/lib/underscore.string.js',
+      'bower_components/restangular/dist/restangular.js',
+      'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/jquery-file-upload/js/jquery.fileupload-angular.js',
+      'app/scripts/app.coffee',
+      'app/scripts/**/*.coffee',
+      'test/spec/**/*.coffee'
     ],
 
     frameworks: ['jasmine'],
@@ -64,7 +60,17 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false
+    singleRun: false,
+
+    preprocessors: {
+      '**/*.coffee': ['coffee']
+    }
+
+    //coffeePreprocessor: {
+      //transformPath: function(path) {
+        //return path.replace(
+      //}
+    //}
   });
 };
 

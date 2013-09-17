@@ -1,5 +1,5 @@
 describe "Controller: MealEditCtrl", ->
-  beforeEach module('emeals.controllers')
+  beforeEach module('emeals.meals')
   beforeEach inject ($controller, $rootScope) ->
     @scope = $rootScope.$new()
     @meal =

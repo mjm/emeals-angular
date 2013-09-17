@@ -1,5 +1,5 @@
 describe "Controller: MealsListCtrl", ->
-  beforeEach module('emeals.controllers')
+  beforeEach module('emeals.meals')
   beforeEach inject ($controller, $rootScope, $q) ->
     @mealsDeferred = $q.defer()
     @scope = $rootScope.$new()
@@ -50,7 +50,11 @@ describe "Controller: MealsListCtrl", ->
   describe "when a fileuploaddone event is fired", ->
     beforeEach ->
       @meals.search.reset()
-      @scope.$apply => @scope.$broadcast "fileuploaddone"
+      @scope.$apply =>
+        @scope.$broadcast "fileuploaddone",
+          result:
+            failures: [{}]
+            successes: [{}] * 6
 
     it "reloads the meals list", ->
       expect(@meals.search).toHaveBeenCalled()

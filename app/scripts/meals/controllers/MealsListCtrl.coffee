@@ -20,6 +20,7 @@ angular.module('emeals.meals').controller 'MealsListCtrl', ($scope, $routeParams
     $scope.meals.splice index, 1
 
   $scope.$on "fileuploaddone", (e, data) ->
+    console.log arguments
     failureCount = data.result.failures.length
     successCount = data.result.successes.length
 

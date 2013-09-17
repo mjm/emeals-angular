@@ -1,5 +1,5 @@
 describe 'Service: Navigation', ->
-  beforeEach module 'emeals.services'
+  beforeEach module 'emeals.common'
   beforeEach inject (Navigation) ->
     @nav = Navigation
 
