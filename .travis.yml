@@ -5,4 +5,5 @@ node_js:
 before_script:
   - 'gem install compass'
   - 'npm install -g bower karma'
+  - 'bower cache clean'
   - 'bower install'
