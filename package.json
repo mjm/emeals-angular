@@ -31,12 +31,13 @@
     "javascript-brunch": "~1.6.0",
     "coffee-script-brunch": "~1.7.2",
     "css-brunch": "~1.6.0",
-    "sass-brunch": "~1.7.0"
+    "sass-brunch": "~1.7.0",
+    "karma-osx-reporter": "~0.0.3"
   },
   "engines": {
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "karma start --single-run"
+    "test": "karma start --reporters=progress --single-run"
   }
 }
