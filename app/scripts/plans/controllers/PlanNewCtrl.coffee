@@ -7,7 +7,7 @@ angular.module('emeals.plans').controller 'PlanNewCtrl', ($scope, Dates, $locati
     meals: {}
   $scope.isNew = true
 
-  $scope.cancel = -> $location.path '/plans/current'
+  $scope.cancel = -> $location.path '/plans'
 
   $scope.save = ->
     Plans.create($scope.plan).then (result) ->

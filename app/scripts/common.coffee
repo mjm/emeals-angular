@@ -1,4 +1,4 @@
-common = angular.module 'emeals.common', ['restangular']
+common = angular.module 'emeals.common', ['ngRoute', 'restangular']
 
 common.config (RestangularProvider) ->
   RestangularProvider.setBaseUrl "/api"

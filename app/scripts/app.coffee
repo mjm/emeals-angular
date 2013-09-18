@@ -1,6 +1,5 @@
 emeals = angular.module 'emeals',
   ['blueimp.fileupload',
-   'ngRoute',
    'emeals.meals',
    'emeals.plans']
 

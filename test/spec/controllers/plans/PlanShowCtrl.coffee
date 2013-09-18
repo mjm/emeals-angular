@@ -1,5 +1,4 @@
 describe 'Controller: PlanShowCtrl', ->
-  beforeEach module 'ngRoute'
   beforeEach module 'emeals.plans'
   beforeEach inject ($rootScope, $controller, $q, $httpBackend) ->
     $httpBackend.whenGET('views/meals/home.html').respond {} # ugh
