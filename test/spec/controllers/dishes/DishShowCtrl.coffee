@@ -1,12 +1,12 @@
 describe "Controller: DishShowCtrl", ->
-  beforeEach module('emeals.meals')
+  beforeEach module 'emeals.meals'
   beforeEach inject ($controller, $rootScope) ->
     @scope = $rootScope.$new()
     $controller 'DishShowCtrl',
       $scope: @scope
 
   it "has no dish set", ->
-    expect(@scope.dish).toBeUndefined()
+    expect(@scope.dish).to.be.undefined
 
   describe "when a meal is set in the scope", ->
     beforeEach ->
@@ -19,7 +19,7 @@ describe "Controller: DishShowCtrl", ->
       @scope.$apply()
 
     it "sets the dish", ->
-      expect(@scope.dish).toEqual
+      expect(@scope.dish).to.eql
         name: "My Entree"
         ingredients: [amount: "1", unit: "teaspoon", description: "kosher salt"]
 

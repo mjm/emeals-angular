@@ -1,15 +1,15 @@
 describe "Controller: DishEditCtrl", ->
-  beforeEach module('emeals.meals')
+  beforeEach module 'emeals.meals'
   beforeEach inject ($controller, $rootScope) ->
     @scope = $rootScope.$new()
     $controller 'DishEditCtrl',
       $scope: @scope
 
   it "has no dish set", ->
-    expect(@scope.dish).toBeUndefined()
+    expect(@scope.dish).to.be.undefined
 
   it "sets unit choices", ->
-    expect(@scope.unitChoices).not.toBeUndefined()
+    expect(@scope.unitChoices).not.to.be.undefined
 
   describe "when a meal is set in the scope", ->
     beforeEach ->
@@ -22,7 +22,7 @@ describe "Controller: DishEditCtrl", ->
       @scope.$apply()
 
     it "sets the dish", ->
-      expect(@scope.dish).toEqual
+      expect(@scope.dish).to.eql
         name: "My Entree"
         ingredients: [amount: "1", unit: "teaspoon", description: "kosher salt"]
 
@@ -30,15 +30,15 @@ describe "Controller: DishEditCtrl", ->
       beforeEach -> @scope.remove(0)
 
       it "deletes the ingredient from the list", ->
-        expect(@scope.dish.ingredients).toEqual []
+        expect(@scope.dish.ingredients).to.eql []
 
     describe "adding an ingredient", ->
       describe "when an ingredients list already exists", ->
         beforeEach -> @scope.add()
 
         it "adds a blank ingredient to the end of the list", ->
-          expect(@scope.dish.ingredients.length).toEqual 2
-          expect(@scope.dish.ingredients[1]).toEqual
+          expect(@scope.dish.ingredients.length).to.equal 2
+          expect(@scope.dish.ingredients[1]).to.eql
             amount: ""
             unit: ""
             description: ""
@@ -49,5 +49,5 @@ describe "Controller: DishEditCtrl", ->
           @scope.add()
 
         it "adds a blank ingredient to a new list", ->
-          expect(@scope.dish.ingredients).toEqual [amount: "", unit: "", description: ""]
+          expect(@scope.dish.ingredients).to.eql [amount: "", unit: "", description: ""]
 

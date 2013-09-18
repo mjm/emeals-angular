@@ -1,5 +1,5 @@
 describe "Controller: MealShowCtrl", ->
-  beforeEach module('emeals.meals')
+  beforeEach module 'emeals.meals'
   beforeEach inject ($controller, $rootScope) ->
     @scope = $rootScope.$new()
     @meal =
@@ -13,48 +13,52 @@ describe "Controller: MealShowCtrl", ->
       meal: @meal
 
   it "sets the current meal", ->
-    expect(@scope.meal).toEqual @meal
+    expect(@scope.meal).to.eql @meal
 
   describe "deleting the meal", ->
     beforeEach inject ($q, $location, $window) ->
       @mealDeferred = $q.defer()
       @oldLocation = $location.path()
 
-      @meal.remove = jasmine.createSpy('remove').andReturn @mealDeferred.promise
-      spyOn $window, 'confirm'
+      @meal.remove = sinon.stub().returns @mealDeferred.promise
+      @sandbox = sinon.sandbox.create()
+      @sandbox.stub $window, 'confirm'
+
+    afterEach ->
+      @sandbox.restore()
 
     it "attempts to confirm the removal", inject ($window) ->
       @scope.$apply => @scope.remove()
-      expect($window.confirm).toHaveBeenCalled()
+      expect($window.confirm).to.have.been.called
 
     describe "when the user rejects the deletion", ->
       beforeEach inject ($window) ->
-        $window.confirm.andReturn false
+        $window.confirm.returns false
         @scope.$apply => @scope.remove()
 
       it "does not call remove the meal", ->
-        expect(@meal.remove).not.toHaveBeenCalled()
+        expect(@meal.remove).to.not.have.been.called
 
     describe "when the user confirms the deletion", ->
       beforeEach inject ($window) ->
-        $window.confirm.andReturn true
+        $window.confirm.returns true
         @scope.$apply => @scope.remove()
 
       it "calls remove on the meal", ->
-        expect(@meal.remove).toHaveBeenCalled()
+        expect(@meal.remove).to.have.been.called
 
       it "does not change the location yet", inject ($location) ->
-        expect($location.path()).toEqual @oldLocation
+        expect($location.path()).to.eql @oldLocation
 
       describe "when the delete goes through", ->
         beforeEach inject ($rootScope) ->
-          @deletedSpy = jasmine.createSpy "mealdeleted"
+          @deletedSpy = sinon.spy()
           $rootScope.$on "mealdeleted", @deletedSpy
 
           @scope.$apply => @mealDeferred.resolve()
 
         it "redirects to the home page", inject ($location) ->
-          expect($location.path()).toEqual "/"
+          expect($location.path()).to.eql "/"
 
         it "broadcasts a mealdeleted event", ->
-          expect(@deletedSpy).toHaveBeenCalled()
+          expect(@deletedSpy).to.have.been.called

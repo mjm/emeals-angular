@@ -1,5 +1,5 @@
 describe "Controller: MealEditCtrl", ->
-  beforeEach module('emeals.meals')
+  beforeEach module 'emeals.meals'
   beforeEach inject ($controller, $rootScope) ->
     @scope = $rootScope.$new()
     @meal =
@@ -14,42 +14,42 @@ describe "Controller: MealEditCtrl", ->
       meal: @meal
 
   it "sets the current meal", ->
-    expect(@scope.meal).toEqual @meal
+    expect(@scope.meal).to.eql @meal
 
   describe "cancelling edits", ->
     beforeEach ->
-      @meal.put = jasmine.createSpy('put')
+      @meal.put = sinon.spy()
       @scope.cancel()
 
     it "does not save the meal", ->
-      expect(@meal.put).not.toHaveBeenCalled()
+      expect(@meal.put).to.not.have.been.called
 
     it "navigates to the meal show page", inject ($location) ->
-      expect($location.path()).toEqual "/meals/asdf"
+      expect($location.path()).to.eql "/meals/asdf"
 
   describe "saving edits", ->
     beforeEach inject ($q, $location) ->
       @mealDeferred = $q.defer()
       @originalPath = $location.path()
 
-      @meal.put = jasmine.createSpy('put').andReturn(@mealDeferred.promise)
+      @meal.put = sinon.stub().returns(@mealDeferred.promise)
       @scope.save()
 
     it "saves the meal", ->
-      expect(@meal.put).toHaveBeenCalled()
+      expect(@meal.put).to.have.been.called
 
     it "does not yet navigate to the meal show page", inject ($location) ->
-      expect($location.path()).toEqual @originalPath
+      expect($location.path()).to.eql @originalPath
 
     describe "and the meal is successfully saved", ->
       beforeEach inject ($rootScope) ->
-        @mealUpdatedSpy = jasmine.createSpy('mealupdated')
+        @mealUpdatedSpy = sinon.spy()
         $rootScope.$new().$on "mealupdated", @mealUpdatedSpy
 
         @scope.$apply => @mealDeferred.resolve()
 
       it "broadcasts a mealupdated event", ->
-        expect(@mealUpdatedSpy).toHaveBeenCalled()
+        expect(@mealUpdatedSpy).to.have.been.called
 
       it "navigates to the meal show page", inject ($location) ->
-        expect($location.path()).toEqual "/meals/asdf"
+        expect($location.path()).to.eql "/meals/asdf"

@@ -1,4 +1,5 @@
 describe 'Controller: PlanShowCtrl', ->
+  beforeEach module 'ngRoute'
   beforeEach module 'emeals.plans'
   beforeEach inject ($rootScope, $controller, $q, $httpBackend) ->
     $httpBackend.whenGET('views/meals/home.html').respond {} # ugh
@@ -18,22 +19,22 @@ describe 'Controller: PlanShowCtrl', ->
           "2013-08-19": [{name: "Meal 1"}, {name: "Meal 2"}]
           "2013-08-21": [{name: "Meal 3"}, {name: "Meal 4"}]
           "2013-08-22": [{name: "Meal 5"}]
-        put: jasmine.createSpy("put").andCallFake => @putDeferred.promise
+        put: sinon.stub().returns @putDeferred.promise
     @scope.$apply()
 
   it "groups the meals into rows of 3", ->
-    expect(@scope.groupedMealsByDay["0"].length).toEqual 3
-    expect(@scope.groupedMealsByDay["1"].length).toEqual 2
+    expect(@scope.groupedMealsByDay["0"].length).to.equal 3
+    expect(@scope.groupedMealsByDay["1"].length).to.equal 2
 
   it "includes the meals for each day", ->
-    expect(@scope.groupedMealsByDay["0"][0].meals).toEqual [{name: "Meal 1"}, {name: "Meal 2"}]
+    expect(@scope.groupedMealsByDay["0"][0].meals).to.eql [{name: "Meal 1"}, {name: "Meal 2"}]
 
   it "creates an empty list for any days that have no meals", ->
-    expect(@scope.groupedMealsByDay["0"][1].meals).toEqual []
-    expect(@scope.plan.meals["2013-08-20"]).toEqual []
+    expect(@scope.groupedMealsByDay["0"][1].meals).to.eql []
+    expect(@scope.plan.meals["2013-08-20"]).to.eql []
 
   it "does not try to save the plan without changes", ->
-    expect(@scope.plan.put).not.toHaveBeenCalled()
+    expect(@scope.plan.put).to.not.have.been.called
 
   describe "when a meal is added to a day", ->
     beforeEach ->
@@ -41,10 +42,10 @@ describe 'Controller: PlanShowCtrl', ->
         @scope.groupedMealsByDay["0"][1].meals.push name: "Meal 6"
 
     it "contains the new meal in the plan", ->
-      expect(@scope.plan.meals["2013-08-20"]).toEqual [name: "Meal 6"]
+      expect(@scope.plan.meals["2013-08-20"]).to.eql [name: "Meal 6"]
 
     it "saves the plan", ->
-      expect(@scope.plan.put).toHaveBeenCalled()
+      expect(@scope.plan.put).to.have.been.called
 
     describe "when saving the plan succeeds", ->
       beforeEach ->
@@ -54,18 +55,18 @@ describe 'Controller: PlanShowCtrl', ->
             rev: 'new-rev'
 
       it "updates the revision of the plan so future saves succeed", ->
-        expect(@scope.plan._rev).toEqual "new-rev"
+        expect(@scope.plan._rev).to.eql "new-rev"
 
   describe "removing a meal from the plan", ->
     beforeEach ->
       @scope.$apply => @scope.remove "2013-08-19", 1
 
     it "removes the meal from the plan", ->
-      expect(@scope.plan.meals["2013-08-19"]).toEqual [name: "Meal 1"]
-      expect(@scope.groupedMealsByDay["0"][0].meals).toEqual [name: "Meal 1"]
+      expect(@scope.plan.meals["2013-08-19"]).to.eql [name: "Meal 1"]
+      expect(@scope.groupedMealsByDay["0"][0].meals).to.eql [name: "Meal 1"]
 
     it "saves the plan", ->
-      expect(@scope.plan.put).toHaveBeenCalled()
+      expect(@scope.plan.put).to.have.been.called
 
     describe "when saving the plan succeeds", ->
       beforeEach ->
@@ -75,4 +76,4 @@ describe 'Controller: PlanShowCtrl', ->
             rev: 'new-rev'
 
       it "updates the revision of the plan so future saves succeed", ->
-        expect(@scope.plan._rev).toEqual "new-rev"
+        expect(@scope.plan._rev).to.eql "new-rev"
