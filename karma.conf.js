@@ -10,6 +10,7 @@ module.exports = function(config) {
       'bower_components/lodash/lodash.js',
       'bower_components/underscore.string/lib/underscore.string.js',
       'bower_components/restangular/dist/restangular.js',
+      'bower_components/jquery/jquery.js',
       'bower_components/jquery-file-upload/js/jquery.fileupload-angular.js',
       'app/scripts/app.coffee',
       'app/scripts/**/*.coffee',

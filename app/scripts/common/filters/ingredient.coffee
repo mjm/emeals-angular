@@ -1,3 +1,3 @@
 angular.module('emeals.common').filter 'ingredient', ->
   (ingredient) ->
-    "#{ingredient.amount || ''} #{ingredient.unit || ''} #{ingredient.description}"
+    _.clean("#{ingredient.amount || ''} #{ingredient.unit || ''} #{ingredient.description}")
