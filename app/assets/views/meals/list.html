@@ -25,12 +25,31 @@
   </form>
 </p>
 
-<div class="list-group" scroll-to-active="$routeParams.mealId" scroll-container="#sidebar">
-  <a ng-repeat="meal in meals" href="/meals/{{meal._id}}" draggable ng-model="meal" class="list-group-item" data-id="{{meal._id}}" ng-class="{active: meal._id == $routeParams.mealId, planning_meal: nav.isViewingPlans()}">
+<div class="list-group" scroll-to-active="$routeParams.mealId" scroll-container="#sidebar"
+  preview=".preview">
+  <a
+    ng-repeat="meal in meals"
+    href="/meals/{{meal._id}}"
+    draggable
+    ng-model="meal"
+    class="list-group-item"
+    data-id="{{meal._id}}"
+    ng-class="{active: meal._id == $routeParams.mealId, planning_meal: nav.isViewingPlans()}">
     <h4 class="list-group-item-heading">{{meal.entree.name}}</h4>
     <p class="list-group-item-text">{{meal.side.name}}</p>
     <div ng-show="meal.flags">
       <span class="label label-info" ng-repeat="flag in meal.flags">{{flag}}</span>
+    </div>
+    <div class="preview">
+      <div class="row">
+        <div class="col-md-6" ng-controller="DishShowCtrl" ng-init="type='entree'">
+          <ng-include src="'views/dishes/show.html'"></ng-include>
+        </div>
+
+        <div class="col-md-6" ng-controller="DishShowCtrl" ng-init="type='side'">
+          <ng-include src="'views/dishes/show.html'"></ng-include>
+        </div>
+      </div>
     </div>
   </a>
 </div>
