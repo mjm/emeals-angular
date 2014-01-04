@@ -5,3 +5,4 @@ _public
 bower_components
 .DS_Store
 libpeerconnection.log
+.vagrant
